@@ -11,10 +11,10 @@
         </div>
         <div class="card-wrap">
             <div class="card-header">
-            <h4>Total Users</h4>
+            <h4>Total User</h4>
             </div>
             <div class="card-body">
-            {{$totalUsers}}
+            {{$totalUser}}
             </div>
         </div>
         </div>
@@ -26,7 +26,7 @@
         </div>
         <div class="card-wrap">
             <div class="card-header">
-            <h4>Total Dokumen Arsip</h4>
+            <h4>Total Arsip</h4>
             </div>
             <div class="card-body">
             {{$totalArsip}}
@@ -41,10 +41,10 @@
         </div>
         <div class="card-wrap">
             <div class="card-header">
-            <h4>Dokumen Input BC25 PKC</h4>
+            <h4>Total Surat Masuk</h4>
             </div>
             <div class="card-body">
-            {{$totalDokumen}}
+            {{$totalSuratMasuk}}
             </div>
         </div>
         </div>
@@ -56,16 +56,35 @@
         </div>
         <div class="card-wrap">
             <div class="card-header">
-            <h4>Total Dokumen Dipinjam</h4>
+            <h4>Total Surat Keluar</h4>
             </div>
             <div class="card-body">
-            {{$totalPinjam}}
+            {{$totalSuratKeluar}}
             </div>
         </div>
         </div>
     </div>
+</div>
+<div class="row">
+    <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+        <div class="card card-statistic-1">
+        <div class="card-icon bg-info">
+            <i class="fas fa-tags"></i>
+        </div>
+        <div class="card-wrap">
+            <div class="card-header">
+            <h4>Total Kategori</h4>
+            </div>
+            <div class="card-body">
+            {{$totalKategori}}
+            </div>
+        </div>
+        </div>
+    </div>
+</div>
 </section>
-              
+</section>
+
 @endsection
 
 {{-- <x-app-layout>

@@ -59,7 +59,7 @@
 
                         <!-- Team Management -->
                             @if (Laravel\Jetstream\Jetstream::hasTeamFeatures())
-                                @if (auth()->user()->role == 0)
+                                @if (auth()->user()->id_role == 1)
                                     <div class="block px-4 py-2 text-xs text-gray-400">
                                         {{ __('Manage Team') }}
                                     </div>

@@ -66,7 +66,7 @@
             <x-jet-input-error for="email" class="mt-2" />
         </div>
 
-        @if(auth()->user()->role > 0)
+        @if(auth()->user()->id_role > 1)
         <!-- NIP -->
         <div class="col-span-6 sm:col-span-4">
             <x-jet-label for="nip" value="{{ __('NIP') }}" />
