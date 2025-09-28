@@ -19,43 +19,18 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
     public function update($user, array $input)
     {
         Validator::make($input, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'email', 'max:255', Rule::unique('users')->ignore($user->id)],
-            'photo' => ['nullable', 'image', 'max:1024'],
-            'nip' => ['required', 'max:255'],
+            'nama_lengkap' => ['required', 'string', 'max:50'],
+            'email' => ['required', 'email', 'max:50', Rule::unique('users')->ignore($user->id_user, 'id_user')],
+            'username' => ['required', 'max:25', Rule::unique('users')->ignore($user->id_user, 'id_user')],
+            'foto' => ['nullable', 'string', 'max:255'],
         ])->validateWithBag('updateProfileInformation');
 
-        if (isset($input['photo'])) {
-            $user->updateProfilePhoto($input['photo']);
-        }
-
-        if ($input['email'] !== $user->email &&
-            $user instanceof MustVerifyEmail) {
-            $this->updateVerifiedUser($user, $input);
-        } else {
-            $user->forceFill([
-                'name' => $input['name'],
-                'email' => $input['email'],
-                'nip' => $input['nip'],
-            ])->save();
-        }
-    }
-
-    /**
-     * Update the given verified user's profile information.
-     *
-     * @param  mixed  $user
-     * @param  array  $input
-     * @return void
-     */
-    protected function updateVerifiedUser($user, array $input)
-    {
         $user->forceFill([
-            'name' => $input['name'],
+            'nama_lengkap' => $input['nama_lengkap'],
             'email' => $input['email'],
-            'email_verified_at' => null,
+            'username' => $input['username'],
+            'foto' => $input['foto'] ?? null,
         ])->save();
-
-        $user->sendEmailVerificationNotification();
     }
+
 }

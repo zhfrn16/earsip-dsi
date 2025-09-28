@@ -22,25 +22,20 @@ class CreateNewUser implements CreatesNewUsers
     public function create(array $input)
     {
         Validator::make($input, [
-            'name' => ['required', 'string', 'max:255'],
+            'nama_lengkap' => ['required', 'string', 'max:50'],
             'username' => ['required', 'max:25', 'unique:users'],
-            'nip' => ['required', 'unique:users'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'email' => ['required', 'string', 'email', 'max:50', 'unique:users'],
             'password' => $this->passwordRules(),
+            'id_role' => ['required', 'exists:roles,id_role'],
         ])->validate();
 
-        return DB::transaction(function () use ($input) {
-            return tap(User::create([
-                'name' => $input['name'],
-                'username' => $input['username'],
-                'nip' => $input['nip'],
-                'role' => $input['role'],
-                'email' => $input['email'],
-                'password' => Hash::make($input['password']),
-            ]), function (User $user) {
-                $this->createTeam($user);
-            });
-        });
+        return User::create([
+            'nama_lengkap' => $input['nama_lengkap'],
+            'username' => $input['username'],
+            'email' => $input['email'],
+            'id_role' => $input['id_role'],
+            'password' => Hash::make($input['password']),
+        ]);
     }
 
     /**

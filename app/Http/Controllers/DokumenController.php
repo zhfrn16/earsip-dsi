@@ -6,7 +6,7 @@ use App\Models\Dokumen;
 use App\Models\Kategori;
 use Illuminate\Http\Request;
 
-class DataArsipController extends Controller
+class DokumenController extends Controller
 {
     public function index()
     {
@@ -29,9 +29,8 @@ class DataArsipController extends Controller
             'tahun' => 'required|integer',
             'deskripsi' => 'nullable',
         ]);
-
         Dokumen::create($request->all());
-        return redirect()->route('dataArsip.index')->with('success', 'Dokumen berhasil ditambahkan');
+        return redirect()->route('dokumen.index')->with('success', 'Dokumen berhasil ditambahkan');
     }
 
     public function edit($id_dokumen)
@@ -44,22 +43,20 @@ class DataArsipController extends Controller
     public function update(Request $request, $id_dokumen)
     {
         $dokumen = Dokumen::findOrFail($id_dokumen);
-
         $request->validate([
             'id_kategori' => 'required|exists:kategori,id_kategori',
             'no_dokumen' => 'required',
             'tahun' => 'required|integer',
             'deskripsi' => 'nullable',
         ]);
-
         $dokumen->update($request->all());
-        return redirect()->route('dataArsip.index')->with('success', 'Dokumen berhasil diupdate');
+        return redirect()->route('dokumen.index')->with('success', 'Dokumen berhasil diupdate');
     }
 
     public function destroy($id_dokumen)
     {
         $dokumen = Dokumen::findOrFail($id_dokumen);
         $dokumen->delete();
-        return redirect()->route('dataArsip.index')->with('success', 'Dokumen berhasil dihapus');
+        return redirect()->route('dokumen.index')->with('success', 'Dokumen berhasil dihapus');
     }
 }

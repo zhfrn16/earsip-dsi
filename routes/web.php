@@ -11,9 +11,10 @@ use Illuminate\Support\Facades\Route;
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
- */
+*/
 
-Route::get('/', function () {
+// Load test routes
+require __DIR__ . '/test.php';Route::get('/', function () {
     return view('auth/login');
 });
 
@@ -38,13 +39,22 @@ Route::get('/batch/export_excel', 'BatchController@export_excel');
 // Route JenisDokumen
 Route::resource('jenisDokumen', JDController::class);
 
-// Route Rak
-Route::resource('rak', RakController::class);
-Route::get('rak/{id}/{box}/{batch}/{year}', 'RakController@listDokumen')->name('listDokumen');
-Route::get('rak/{rak}/{box}/{year}', 'RakController@showRak');
-
 // Route DataArsip
 Route::resource('dataArsip', DataArsipController::class);
+
+// Route Surat Masuk
+Route::resource('surat-masuk', 'SuratMasukController');
+Route::get('/surat-masuk/export', 'SuratMasukController@export')->name('surat-masuk.export');
+Route::get('/surat-masuk/export-pdf', 'SuratMasukController@exportPdf')->name('surat-masuk.export-pdf');
+
+// Route Surat Keluar
+Route::resource('surat-keluar', 'SuratKeluarController');
+Route::patch('/surat-keluar/{id}/approve', 'SuratKeluarController@approve')->name('surat-keluar.approve');
+Route::get('/surat-keluar/export', 'SuratKeluarController@export')->name('surat-keluar.export');
+Route::get('/surat-keluar/export-pdf', 'SuratKeluarController@exportPdf')->name('surat-keluar.export-pdf');
+
+// Route Users (untuk user management)
+Route::resource('users', 'UserController');
 Route::post('/dataArsip/getDokumen', 'DataArsipController@getDataSerahTerima')->name('arsip');
 Route::post('/dataArsip/getArsip', 'DataArsipController@getDataArsip')->name('getArsip');
 Route::post('/arsip/export', 'DataArsipController@exportDataArsip');
@@ -62,12 +72,6 @@ Route::post('/get/peminjaman', 'PeminjamanController@getDataPeminjaman')->name('
 Route::post('/get/nd', 'PeminjamanController@getListND')->name('getListND');
 Route::get('/get/nd/{nd}', 'PeminjamanController@getDataPeminjamanByND')->name('getByND');
 Route::get('/update/peminjaman', 'PeminjamanController@update');
-
-Route::resource('karung', DataKarungController::class);
-Route::group(['prefix' => 'karung'], function () {
-    Route::post('/get', 'DataKarungController@getDataKarung')->name('getKarung');
-    Route::post('/add/data', 'DataKarungController@addDataKarung');
-});
 
 Route::get('/users/list', 'DashboardController@userList');
 

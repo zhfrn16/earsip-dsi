@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Kategori;
 use Illuminate\Http\Request;
 
-class JDController extends Controller
+class KategoriController extends Controller
 {
     public function index()
     {
@@ -25,9 +25,8 @@ class JDController extends Controller
             'nama_kategori' => 'required',
             'deskripsi' => 'nullable',
         ]);
-
         Kategori::create($request->all());
-        return redirect()->route('jenisDokumen.index')->with('success', 'Kategori berhasil ditambahkan');
+        return redirect()->route('kategori.index')->with('success', 'Kategori berhasil ditambahkan');
     }
 
     public function edit($id_kategori)
@@ -39,20 +38,18 @@ class JDController extends Controller
     public function update(Request $request, $id_kategori)
     {
         $kategori = Kategori::findOrFail($id_kategori);
-
         $request->validate([
             'nama_kategori' => 'required',
             'deskripsi' => 'nullable',
         ]);
-
         $kategori->update($request->all());
-        return redirect()->route('jenisDokumen.index')->with('success', 'Kategori berhasil diupdate');
+        return redirect()->route('kategori.index')->with('success', 'Kategori berhasil diupdate');
     }
 
     public function destroy($id_kategori)
     {
         $kategori = Kategori::findOrFail($id_kategori);
         $kategori->delete();
-        return redirect()->route('jenisDokumen.index')->with('success', 'Kategori berhasil dihapus');
+        return redirect()->route('kategori.index')->with('success', 'Kategori berhasil dihapus');
     }
 }
