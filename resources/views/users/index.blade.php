@@ -139,78 +139,6 @@
                                     @endif
                                 </tr>
 
-                                <!-- Detail Modal -->
-                                <div class="modal fade" id="detailModal-{{ $user->id_user }}" tabindex="-1" role="dialog">
-                                    <div class="modal-dialog modal-lg" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title">Detail User</h5>
-                                                <button type="button" class="close" data-dismiss="modal">
-                                                    <span>&times;</span>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <div class="row">
-                                                    <div class="col-md-4 text-center">
-                                                        @if($user->foto)
-                                                            <img src="{{ asset('storage/' . $user->foto) }}" alt="{{ $user->nama_lengkap }}"
-                                                                 class="rounded-circle mb-3" width="120" height="120">
-                                                        @else
-                                                            <div class="avatar avatar-xl bg-primary text-white rounded-circle d-flex align-items-center justify-content-center mb-3 mx-auto" style="width: 120px; height: 120px; font-size: 2rem;">
-                                                                {{ strtoupper(substr($user->nama_lengkap, 0, 2)) }}
-                                                            </div>
-                                                        @endif
-                                                        <h5>{{ $user->nama_lengkap }}</h5>
-                                                        <p class="text-muted">{{ $user->role->nama_role ?? 'No Role' }}</p>
-                                                    </div>
-                                                    <div class="col-md-8">
-                                                        <table class="table table-borderless">
-                                                            <tr>
-                                                                <td width="40%"><strong>ID User</strong></td>
-                                                                <td>: {{ $user->id_user }}</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td><strong>Username</strong></td>
-                                                                <td>: <code>{{ $user->username }}</code></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td><strong>Email</strong></td>
-                                                                <td>: {{ $user->email }}</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td><strong>Email Verified</strong></td>
-                                                                <td>:
-                                                                    @if($user->email_verified_at)
-                                                                        <span class="badge badge-success">Yes</span>
-                                                                        <small class="text-muted">({{ \Carbon\Carbon::parse($user->email_verified_at)->format('d/m/Y H:i') }})</small>
-                                                                    @else
-                                                                        <span class="badge badge-warning">No</span>
-                                                                    @endif
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td><strong>Created At</strong></td>
-                                                                <td>: {{ $user->created_at ? $user->created_at->format('d/m/Y H:i') : '-' }}</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td><strong>Updated At</strong></td>
-                                                                <td>: {{ $user->updated_at ? $user->updated_at->format('d/m/Y H:i') : '-' }}</td>
-                                                            </tr>
-                                                        </table>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                                                @if($user->id_user != auth()->user()->id_user)
-                                                <a href="{{ route('users.edit', $user->id_user) }}" class="btn btn-primary">
-                                                    <i class="fas fa-edit"></i> Edit User
-                                                </a>
-                                                @endif
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                                 @empty
                                 <tr>
                                     <td colspan="{{ auth()->user()->id_role == 1 ? '8' : '7' }}" class="text-center">Tidak ada data user</td>
@@ -224,6 +152,92 @@
         </div>
     </div>
 </div>
+
+<!-- Modal Details (Outside Table) -->
+@foreach($users as $user)
+<div class="modal fade" id="detailModal-{{ $user->id_user }}" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Detail User - {{ $user->nama_lengkap }}</h5>
+                <button type="button" class="close" data-dismiss="modal">
+                    <span>&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-4 text-center">
+                        @if($user->foto)
+                            <img src="{{ asset('storage/' . $user->foto) }}" alt="{{ $user->nama_lengkap }}"
+                                 class="rounded-circle mb-3" width="120" height="120">
+                        @else
+                            <div class="avatar avatar-xl bg-primary text-white rounded-circle d-flex align-items-center justify-content-center mb-3 mx-auto" style="width: 120px; height: 120px; font-size: 2rem;">
+                                {{ strtoupper(substr($user->nama_lengkap, 0, 2)) }}
+                            </div>
+                        @endif
+                        <h5 class="mb-0">{{ $user->nama_lengkap }}</h5>
+                        <p class="text-muted">{{ $user->role->nama_role ?? 'N/A' }}</p>
+                    </div>
+                    <div class="col-md-8">
+                        <table class="table table-borderless">
+                            <tr>
+                                <td width="30%"><strong>Username</strong></td>
+                                <td>: {{ $user->username }}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Email</strong></td>
+                                <td>: {{ $user->email }}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>No HP</strong></td>
+                                <td>: {{ $user->no_hp ?? '-' }}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Alamat</strong></td>
+                                <td>: {{ $user->alamat ?? '-' }}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Role</strong></td>
+                                <td>: <span class="badge badge-primary">{{ $user->role->nama_role ?? 'N/A' }}</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Status</strong></td>
+                                <td>:
+                                    @if($user->status == 'active')
+                                        <span class="badge badge-success">Aktif</span>
+                                    @else
+                                        <span class="badge badge-danger">Tidak Aktif</span>
+                                    @endif
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>Dibuat</strong></td>
+                                <td>: {{ $user->created_at ? $user->created_at->format('d/m/Y H:i') : '-' }}</td>
+                            </tr>
+                            @if($user->created_at != $user->updated_at)
+                            <tr>
+                                <td><strong>Diperbarui</strong></td>
+                                <td>: {{ $user->updated_at ? $user->updated_at->format('d/m/Y H:i') : '-' }}</td>
+                            </tr>
+                            @endif
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                    <i class="fas fa-times"></i> Tutup
+                </button>
+                @if($user->id_user != auth()->user()->id_user && auth()->user()->id_role == 1)
+                <a href="{{ route('users.edit', $user->id_user) }}" class="btn btn-primary">
+                    <i class="fas fa-edit"></i> Edit User
+                </a>
+                @endif
+            </div>
+        </div>
+    </div>
+</div>
+@endforeach
 
 <!-- Delete Form -->
 <form id="delete-form" action="" method="POST" style="display: none;">

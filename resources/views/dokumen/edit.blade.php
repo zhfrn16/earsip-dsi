@@ -21,7 +21,7 @@
                     <h4>Form Edit Dokumen</h4>
                 </div>
                 <div class="card-body">
-                    <form action="{{ route('dataArsip.update', $dataArsip->id_arsip) }}" method="POST">
+                    <form action="{{ route('dataArsip.update', $dokumen->id_dokumen) }}" method="POST">
                         @csrf
                         @method('PUT')
 
@@ -29,7 +29,7 @@
                             <label for="id_dokumen">ID Dokumen <span class="text-danger">*</span></label>
                             <input type="text" class="form-control @error('id_dokumen') is-invalid @enderror"
                                    id="id_dokumen" name="id_dokumen"
-                                   value="{{ old('id_dokumen', $dataArsip->id_dokumen) }}" required>
+                                   value="{{ old('id_dokumen', $dokumen->id_dokumen) }}" required>
                             @error('id_dokumen')
                                 <div class="invalid-feedback">
                                     {{ $message }}
@@ -41,7 +41,7 @@
                             <label for="no_dokumen">No Dokumen <span class="text-danger">*</span></label>
                             <input type="text" class="form-control @error('no_dokumen') is-invalid @enderror"
                                    id="no_dokumen" name="no_dokumen"
-                                   value="{{ old('no_dokumen', $dataArsip->no_dokumen) }}" required>
+                                   value="{{ old('no_dokumen', $dokumen->no_dokumen) }}" required>
                             @error('no_dokumen')
                                 <div class="invalid-feedback">
                                     {{ $message }}
@@ -53,7 +53,7 @@
                             <label for="tahun">Tahun <span class="text-danger">*</span></label>
                             <input type="number" class="form-control @error('tahun') is-invalid @enderror"
                                    id="tahun" name="tahun"
-                                   value="{{ old('tahun', $dataArsip->tahun) }}"
+                                   value="{{ old('tahun', $dokumen->tahun) }}"
                                    min="1900" max="{{ date('Y') + 10 }}" required>
                             @error('tahun')
                                 <div class="invalid-feedback">
@@ -68,7 +68,7 @@
                                 <option value="">-- Pilih Kategori --</option>
                                 @foreach($kategoris as $kategori)
                                     <option value="{{ $kategori->id_kategori }}"
-                                        {{ old('id_kategori', $dataArsip->id_kategori) == $kategori->id_kategori ? 'selected' : '' }}>
+                                        {{ old('id_kategori', $dokumen->id_kategori) == $kategori->id_kategori ? 'selected' : '' }}>
                                         {{ $kategori->nama_kategori }}
                                     </option>
                                 @endforeach
@@ -83,7 +83,7 @@
                         <div class="form-group">
                             <label for="deskripsi">Deskripsi</label>
                             <textarea class="form-control @error('deskripsi') is-invalid @enderror"
-                                      id="deskripsi" name="deskripsi" rows="3">{{ old('deskripsi', $dataArsip->deskripsi) }}</textarea>
+                                      id="deskripsi" name="deskripsi" rows="3">{{ old('deskripsi', $dokumen->deskripsi) }}</textarea>
                             @error('deskripsi')
                                 <div class="invalid-feedback">
                                     {{ $message }}

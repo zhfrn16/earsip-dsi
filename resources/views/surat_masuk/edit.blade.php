@@ -21,7 +21,7 @@
                     <h4>Form Edit Surat Masuk</h4>
                 </div>
                 <div class="card-body">
-                    <form action="{{ route('surat-masuk.update', $suratMasuk->id) }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('surat-masuk.update', $suratMasuk->id_surat_masuk) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
 
@@ -40,28 +40,17 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="tgl_terima">Tanggal Terima <span class="text-danger">*</span></label>
-                                    <input type="date" class="form-control @error('tgl_terima') is-invalid @enderror"
-                                           id="tgl_terima" name="tgl_terima"
-                                           value="{{ old('tgl_terima', $suratMasuk->tgl_terima ? $suratMasuk->tgl_terima->format('Y-m-d') : '') }}" required>
-                                    @error('tgl_terima')
+                                    <label for="tanggal">Tanggal <span class="text-danger">*</span></label>
+                                    <input type="date" class="form-control @error('tanggal') is-invalid @enderror"
+                                           id="tanggal" name="tanggal"
+                                           value="{{ old('tanggal', $suratMasuk->tanggal ? $suratMasuk->tanggal->format('Y-m-d') : '') }}" required>
+                                    @error('tanggal')
                                         <div class="invalid-feedback">
                                             {{ $message }}
                                         </div>
                                     @enderror
                                 </div>
 
-                                <div class="form-group">
-                                    <label for="tgl_surat">Tanggal Surat <span class="text-danger">*</span></label>
-                                    <input type="date" class="form-control @error('tgl_surat') is-invalid @enderror"
-                                           id="tgl_surat" name="tgl_surat"
-                                           value="{{ old('tgl_surat', $suratMasuk->tgl_surat ? $suratMasuk->tgl_surat->format('Y-m-d') : '') }}" required>
-                                    @error('tgl_surat')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
-                                    @enderror
-                                </div>
 
                                 <div class="form-group">
                                     <label for="pengirim">Pengirim <span class="text-danger">*</span></label>
@@ -69,6 +58,22 @@
                                            id="pengirim" name="pengirim"
                                            value="{{ old('pengirim', $suratMasuk->pengirim) }}" required>
                                     @error('pengirim')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="sifat_surat">Sifat Surat <span class="text-danger">*</span></label>
+                                    <select class="form-control @error('sifat_surat') is-invalid @enderror" id="sifat_surat" name="sifat_surat" required>
+                                        <option value="">-- Pilih Sifat Surat --</option>
+                                        <option value="Biasa" {{ old('sifat_surat', $suratMasuk->sifat_surat) == 'Biasa' ? 'selected' : '' }}>Biasa</option>
+                                        <option value="Penting" {{ old('sifat_surat', $suratMasuk->sifat_surat) == 'Penting' ? 'selected' : '' }}>Penting</option>
+                                        <option value="Rahasia" {{ old('sifat_surat', $suratMasuk->sifat_surat) == 'Rahasia' ? 'selected' : '' }}>Rahasia</option>
+                                        <option value="Segera" {{ old('sifat_surat', $suratMasuk->sifat_surat) == 'Segera' ? 'selected' : '' }}>Segera</option>
+                                    </select>
+                                    @error('sifat_surat')
                                         <div class="invalid-feedback">
                                             {{ $message }}
                                         </div>
@@ -89,54 +94,27 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="status">Status <span class="text-danger">*</span></label>
-                                    <select class="form-control @error('status') is-invalid @enderror" id="status" name="status" required>
-                                        <option value="">-- Pilih Status --</option>
-                                        <option value="diterima" {{ old('status', $suratMasuk->status) == 'diterima' ? 'selected' : '' }}>Diterima</option>
-                                        <option value="proses" {{ old('status', $suratMasuk->status) == 'proses' ? 'selected' : '' }}>Proses</option>
-                                        <option value="selesai" {{ old('status', $suratMasuk->status) == 'selesai' ? 'selected' : '' }}>Selesai</option>
-                                    </select>
-                                    @error('status')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
-                                    @enderror
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="disposisi">Disposisi</label>
-                                    <textarea class="form-control @error('disposisi') is-invalid @enderror"
-                                              id="disposisi" name="disposisi" rows="2"
-                                              placeholder="Isi disposisi jika ada">{{ old('disposisi', $suratMasuk->disposisi) }}</textarea>
-                                    @error('disposisi')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
-                                    @enderror
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="file_surat">File Surat</label>
-                                    @if($suratMasuk->file_surat)
+                                    <label for="file">File Surat</label>
+                                    @if($suratMasuk->file)
                                         <div class="mb-2">
                                             <small class="text-muted">File saat ini:</small>
-                                            <a href="{{ asset('storage/' . $suratMasuk->file_surat) }}" target="_blank" class="d-block">
-                                                <i class="fas fa-file"></i> {{ basename($suratMasuk->file_surat) }}
+                                            <a href="{{ asset('file_arsip/' . $suratMasuk->file) }}" target="_blank" class="d-block">
+                                                <i class="fas fa-file"></i> {{ basename($suratMasuk->file) }}
                                             </a>
                                         </div>
                                     @endif
                                     <div class="custom-file">
-                                        <input type="file" class="custom-file-input @error('file_surat') is-invalid @enderror"
-                                               id="file_surat" name="file_surat" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png">
-                                        <label class="custom-file-label" for="file_surat">{{ $suratMasuk->file_surat ? 'Ganti file' : 'Pilih file' }}</label>
+                                        <input type="file" class="custom-file-input @error('file') is-invalid @enderror"
+                                               id="file" name="file" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png">
+                                        <label class="custom-file-label" for="file">{{ $suratMasuk->file ? 'Ganti file' : 'Pilih file' }}</label>
                                     </div>
                                     <small class="form-text text-muted">
                                         File yang diizinkan: PDF, DOC, DOCX, JPG, JPEG, PNG. Maksimal 10MB.
-                                        @if($suratMasuk->file_surat)
+                                        @if($suratMasuk->file)
                                             <br>Kosongkan jika tidak ingin mengganti file.
                                         @endif
                                     </small>
-                                    @error('file_surat')
+                                    @error('file')
                                         <div class="invalid-feedback">
                                             {{ $message }}
                                         </div>
@@ -148,11 +126,11 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="form-group">
-                                    <label for="keterangan">Keterangan</label>
-                                    <textarea class="form-control @error('keterangan') is-invalid @enderror"
-                                              id="keterangan" name="keterangan" rows="3"
-                                              placeholder="Keterangan tambahan (opsional)">{{ old('keterangan', $suratMasuk->keterangan) }}</textarea>
-                                    @error('keterangan')
+                                    <label for="isi_surat">Isi Surat</label>
+                                    <textarea class="form-control @error('isi_surat') is-invalid @enderror"
+                                              id="isi_surat" name="isi_surat" rows="3"
+                                              placeholder="Isi surat (opsional)">{{ old('isi_surat', $suratMasuk->isi_surat) }}</textarea>
+                                    @error('isi_surat')
                                         <div class="invalid-feedback">
                                             {{ $message }}
                                         </div>

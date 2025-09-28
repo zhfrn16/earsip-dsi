@@ -107,6 +107,17 @@
                                 </div>
 
                                 <div class="form-group">
+                                    <label for="tertuj">Tujuan <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control @error('tertuj') is-invalid @enderror"
+                                           id="tertuj" name="tertuj" value="{{ old('tertuj') }}" required>
+                                    @error('tertuj')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+
+                                <div class="form-group">
                                     <label for="sifat_surat">Sifat Surat <span class="text-danger">*</span></label>
                                     <select class="form-control @error('sifat_surat') is-invalid @enderror" id="sifat_surat" name="sifat_surat" required>
                                         <option value="">-- Pilih Sifat Surat --</option>

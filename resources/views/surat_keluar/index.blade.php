@@ -53,10 +53,11 @@
                                 <tr>
                                     <th width="5%">No</th>
                                     <th>No Surat</th>
-                                    <th>Tgl Surat</th>
-                                    <th>Pengirim</th>
+                                    <th>Tanggal</th>
+                                    <th>Tujuan</th>
                                     <th>Perihal</th>
                                     <th>Sifat</th>
+                                    <th>Status</th>
                                     <th width="15%">Aksi</th>
                                 </tr>
                             </thead>
@@ -68,7 +69,7 @@
                                         <strong>{{ $surat->no_surat }}</strong>
                                     </td>
                                     <td>{{ $surat->tanggal ? \Carbon\Carbon::parse($surat->tanggal)->format('d/m/Y') : '-' }}</td>
-                                    <td>{{ $surat->pengirim }}</td>
+                                    <td>{{ $surat->tertuj ?? $surat->alamat ?? '-' }}</td>
                                     <td>
                                         <span title="{{ $surat->perihal }}">
                                             {{ Str::limit($surat->perihal, 50) }}
@@ -94,6 +95,21 @@
                                         @endif
                                     </td>
                                     <td>
+                                        @if($surat->status == 1)
+                                            <span class="badge badge-success">
+                                                <i class="fas fa-check-circle"></i> Disetujui
+                                            </span>
+                                        @elseif($surat->status == 2)
+                                            <span class="badge badge-danger">
+                                                <i class="fas fa-times-circle"></i> Ditolak
+                                            </span>
+                                        @else
+                                            <span class="badge badge-warning">
+                                                <i class="fas fa-clock"></i> Menunggu
+                                            </span>
+                                        @endif
+                                    </td>
+                                    <td>
                                         <div class="btn-group" role="group">
                                             <button type="button" class="btn btn-sm btn-info" title="Detail"
                                                     data-toggle="modal" data-target="#detailModal-{{ $surat->id_surat_keluar }}">
@@ -110,96 +126,9 @@
                                         </div>
                                     </td>
                                 </tr>
-
-                                <!-- Detail Modal -->
-                                <div class="modal fade" id="detailModal-{{ $surat->id_surat_keluar }}" tabindex="-1" role="dialog">
-                                    <div class="modal-dialog modal-lg" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title">Detail Surat Keluar</h5>
-                                                <button type="button" class="close" data-dismiss="modal">
-                                                    <span>&times;</span>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <table class="table table-borderless">
-                                                            <tr>
-                                                                <td width="40%"><strong>ID Surat</strong></td>
-                                                                <td>: {{ $surat->id_surat_keluar }}</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td><strong>No Surat</strong></td>
-                                                                <td>: {{ $surat->no_surat }}</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td><strong>Tanggal</strong></td>
-                                                                <td>: {{ $surat->tanggal ? \Carbon\Carbon::parse($surat->tanggal)->format('d/m/Y') : '-' }}</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td><strong>Pengirim</strong></td>
-                                                                <td>: {{ $surat->pengirim }}</td>
-                                                            </tr>
-                                                        </table>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <table class="table table-borderless">
-                                                            <tr>
-                                                                <td width="40%"><strong>Sifat Surat</strong></td>
-                                                                <td>:
-                                                                    @if($surat->sifat_surat == 'Segera')
-                                                                        <span class="badge badge-danger">{{ $surat->sifat_surat }}</span>
-                                                                    @elseif($surat->sifat_surat == 'Penting')
-                                                                        <span class="badge badge-warning">{{ $surat->sifat_surat }}</span>
-                                                                    @elseif($surat->sifat_surat == 'Rahasia')
-                                                                        <span class="badge badge-dark">{{ $surat->sifat_surat }}</span>
-                                                                    @else
-                                                                        <span class="badge badge-secondary">{{ $surat->sifat_surat ?? 'Biasa' }}</span>
-                                                                    @endif
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td><strong>Dokumen</strong></td>
-                                                                <td>: {{ $surat->dokumen->no_dokumen ?? 'N/A' }}</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td><strong>User</strong></td>
-                                                                <td>: {{ $surat->user->name ?? 'N/A' }}</td>
-                                                            </tr>
-                                                            @if($surat->file)
-                                                            <tr>
-                                                                <td><strong>File</strong></td>
-                                                                <td>: <a href="{{ asset('file_arsip/' . $surat->file) }}" target="_blank" class="btn btn-sm btn-outline-primary">
-                                                                    <i class="fas fa-download"></i> Download
-                                                                </a></td>
-                                                            </tr>
-                                                            @endif
-                                                        </table>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-12">
-                                                        <strong>Perihal:</strong>
-                                                        <p class="mt-2">{{ $surat->perihal }}</p>
-                                                    </div>
-                                                    @if($surat->isi_surat)
-                                                    <div class="col-12">
-                                                        <strong>Isi Surat:</strong>
-                                                        <p class="mt-2">{{ $surat->isi_surat }}</p>
-                                                    </div>
-                                                    @endif
-                                                </div>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                                 @empty
                                 <tr>
-                                    <td colspan="7" class="text-center">Tidak ada data surat keluar</td>
+                                    <td colspan="8" class="text-center">Tidak ada data surat keluar</td>
                                 </tr>
                                 @endforelse
                             </tbody>
@@ -210,6 +139,107 @@
         </div>
     </div>
 </div>
+
+<!-- Modal Details (Outside Table) -->
+@foreach($suratKeluar as $surat)
+<div class="modal fade" id="detailModal-{{ $surat->id_surat_keluar }}" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Detail Surat Keluar - {{ $surat->no_surat }}</h5>
+                <button type="button" class="close" data-dismiss="modal">
+                    <span>&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <table class="table table-borderless">
+                            <tr>
+                                <td width="40%"><strong>No Surat</strong></td>
+                                <td>: {{ $surat->no_surat }}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Tanggal</strong></td>
+                                <td>: {{ $surat->tanggal ? \Carbon\Carbon::parse($surat->tanggal)->format('d/m/Y H:i') : '-' }}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Tujuan</strong></td>
+                                <td>: {{ $surat->tertuj ?? $surat->alamat ?? '-' }}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Sifat Surat</strong></td>
+                                <td>:
+                                    @if($surat->sifat_surat == 'Segera')
+                                        <span class="badge badge-danger">{{ $surat->sifat_surat }}</span>
+                                    @elseif($surat->sifat_surat == 'Penting')
+                                        <span class="badge badge-warning">{{ $surat->sifat_surat }}</span>
+                                    @elseif($surat->sifat_surat == 'Rahasia')
+                                        <span class="badge badge-dark">{{ $surat->sifat_surat }}</span>
+                                    @else
+                                        <span class="badge badge-secondary">{{ $surat->sifat_surat ?? 'Biasa' }}</span>
+                                    @endif
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="col-md-6">
+                        <table class="table table-borderless">
+                            <tr>
+                                <td width="40%"><strong>Status</strong></td>
+                                <td>:
+                                    @if($surat->status == 1)
+                                        <span class="badge badge-success">Disetujui</span>
+                                    @elseif($surat->status == 2)
+                                        <span class="badge badge-danger">Ditolak</span>
+                                    @else
+                                        <span class="badge badge-warning">Menunggu</span>
+                                    @endif
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>Dokumen</strong></td>
+                                <td>: {{ $surat->dokumen->nama_dokumen ?? 'N/A' }}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>User</strong></td>
+                                <td>: {{ $surat->user->nama_lengkap ?? 'N/A' }}</td>
+                            </tr>
+                            @if($surat->file)
+                            <tr>
+                                <td><strong>File</strong></td>
+                                <td>:
+                                    <a href="{{ asset('file_arsip/' . $surat->file) }}" target="_blank" class="btn btn-sm btn-outline-primary">
+                                        <i class="fas fa-download"></i> Download
+                                    </a>
+                                </td>
+                            </tr>
+                            @endif
+                        </table>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <strong>Perihal:</strong>
+                        <p class="mt-2">{{ $surat->perihal }}</p>
+                    </div>
+                    @if($surat->isi_surat)
+                    <div class="col-12">
+                        <strong>Isi Surat:</strong>
+                        <p class="mt-2">{{ $surat->isi_surat }}</p>
+                    </div>
+                    @endif
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                    <i class="fas fa-times"></i> Tutup
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+@endforeach
 
 <!-- Delete Form -->
 <form id="delete-form" action="" method="POST" style="display: none;">
