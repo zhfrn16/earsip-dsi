@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class TabelRak extends Migration
+class CreateRolesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,10 @@ class TabelRak extends Migration
      */
     public function up()
     {
-        Schema::create('rak', function (Blueprint $table) {
-            $table->id('noRak');
+        Schema::create('roles', function (Blueprint $table) {
+            $table->id('id_role');
+            $table->string('nama_role', 50);
+            $table->string('deskripsi', 100)->nullable();
             $table->timestamps();
         });
     }
@@ -26,6 +28,6 @@ class TabelRak extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('roles');
     }
 }

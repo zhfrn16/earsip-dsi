@@ -5,19 +5,20 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Laravel\Fortify\TwoFactorAuthenticatable;
-use Laravel\Jetstream\HasProfilePhoto;
-use Laravel\Jetstream\HasTeams;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
     use HasApiTokens;
     use HasFactory;
-    use HasProfilePhoto;
-    use HasTeams;
     use Notifiable;
-    use TwoFactorAuthenticatable;
+
+    /**
+     * The primary key associated with the table.
+     *
+     * @var string
+     */
+    protected $primaryKey = 'id_user';
 
     /**
      * The attributes that are mass assignable.
@@ -25,7 +26,12 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'nip', 'username', 'role',
+        'nama_lengkap',
+        'email',
+        'username',
+        'password',
+        'foto',
+        'id_role',
     ];
 
     /**
@@ -35,9 +41,6 @@ class User extends Authenticatable
      */
     protected $hidden = [
         'password',
-        'remember_token',
-        'two_factor_recovery_codes',
-        'two_factor_secret',
     ];
 
     /**
@@ -50,11 +53,34 @@ class User extends Authenticatable
     ];
 
     /**
-     * The accessors to append to the model's array form.
-     *
-     * @var array
+     * Get the role that belongs to the user.
      */
-    protected $appends = [
-        'profile_photo_url',
-    ];
+    public function role()
+    {
+        return $this->belongsTo(Role::class, 'id_role', 'id_role');
+    }
+
+    /**
+     * Get the role name.
+     */
+    public function getRoleNameAttribute()
+    {
+        return $this->role()->first()?->nama_role;
+    }
+
+    /**
+     * Get the surat keluar for the user.
+     */
+    public function suratKeluar()
+    {
+        return $this->hasMany(SuratKeluar::class, 'id_user', 'id_user');
+    }
+
+    /**
+     * Get the surat masuk for the user.
+     */
+    public function suratMasuk()
+    {
+        return $this->hasMany(SuratMasuk::class, 'id_user', 'id_user');
+    }
 }

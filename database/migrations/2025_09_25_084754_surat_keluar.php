@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class Dokumen extends Migration
+class SuratKeluar extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,15 @@ class Dokumen extends Migration
      */
     public function up()
     {
-        Schema::create('dokumen', function (Blueprint $table) {
+        Schema::create('surat_keluar', function (Blueprint $table) {
             $table->id();
-            $table->integer('id_kategori');
-            $table->string('nama_dokumen');
-            $table->string('no_dokumen');
-            $table->string('tahun_dokumen');
-            $table->string('keterangan')->nullable();
-            $table->string('file_dokumen')->nullable();
+            $table->integer('id_surat');
+            $table->integer('id_user');
+            $table->date('tanggal_keluar');
+            $table->string('sifat_surat');
+            $table->string('pengirim_surat');
+            $table->string('perihal');
+            
             $table->timestamps();
         });
     }
@@ -32,6 +33,6 @@ class Dokumen extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('surat_keluar');
     }
 }
