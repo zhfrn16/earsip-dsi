@@ -68,19 +68,5 @@ class User extends Authenticatable
         return $this->role()->first()?->nama_role;
     }
 
-    /**
-     * Get the surat keluar for the user.
-     */
-    public function suratKeluar()
-    {
-        return $this->hasMany(SuratKeluar::class, 'id_user', 'id_user');
-    }
 
-    /**
-     * Get the surat masuk for the user.
-     */
-    public function suratMasuk()
-    {
-        return $this->hasMany(SuratMasuk::class, 'id_user', 'id_user');
-    }
 }

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class Dokumen extends Model
 {
@@ -49,7 +50,9 @@ class Dokumen extends Model
         'no_dokumen',
         'tahun',
         'deskripsi',
-        'file_dokumen'
+        'file_dokumen',
+        'file',
+        'jenis_surat'
     ];
 
     /**
@@ -73,7 +76,7 @@ class Dokumen extends Model
      */
     public function suratKeluar()
     {
-        return $this->hasMany(SuratKeluar::class, 'id_dokumen', 'id_dokumen');
+        return $this->hasOne(SuratKeluar::class, 'id_dokumen', 'id_dokumen');
     }
 
     /**
@@ -81,6 +84,36 @@ class Dokumen extends Model
      */
     public function suratMasuk()
     {
-        return $this->hasMany(SuratMasuk::class, 'id_dokumen', 'id_dokumen');
+        return $this->hasOne(SuratMasuk::class, 'id_dokumen', 'id_dokumen');
+    }
+
+    /**
+     * Get the file URL attribute.
+     */
+    public function getFileUrlAttribute()
+    {
+        if ($this->file) {
+            return asset('storage/' . $this->file);
+        }
+        return null;
+    }
+
+    /**
+     * Get the file name from path.
+     */
+    public function getFileNameAttribute()
+    {
+        if ($this->file) {
+            return basename($this->file);
+        }
+        return null;
+    }
+
+    /**
+     * Check if document has file.
+     */
+    public function hasFile()
+    {
+        return !empty($this->file) && Storage::disk('public')->exists($this->file);
     }
 }

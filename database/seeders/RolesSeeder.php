@@ -14,25 +14,29 @@ class RolesSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('roles')->insert([
+        $roles = [
             [
                 'nama_role' => 'Administrator',
                 'deskripsi' => 'Admin sistem dengan akses penuh',
-                'created_at' => now(),
-                'updated_at' => now()
             ],
             [
                 'nama_role' => 'Operator',
                 'deskripsi' => 'Operator untuk input dan kelola data arsip',
-                'created_at' => now(),
-                'updated_at' => now()
             ],
             [
                 'nama_role' => 'User',
                 'deskripsi' => 'User biasa dengan akses terbatas',
-                'created_at' => now(),
-                'updated_at' => now()
             ]
-        ]);
+        ];
+
+        foreach ($roles as $role) {
+            DB::table('roles')->updateOrInsert(
+                ['nama_role' => $role['nama_role']],
+                array_merge($role, [
+                    'created_at' => now(),
+                    'updated_at' => now()
+                ])
+            );
+        }
     }
 }

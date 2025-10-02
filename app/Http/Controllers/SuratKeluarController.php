@@ -31,9 +31,11 @@ class SuratKeluarController extends Controller
             'no_surat' => 'required',
             'tanggal' => 'required|date',
             'sifat_surat' => 'required',
-            'tujuan' => 'required',
+            'pengirim' => 'required',
+            'tertuj' => 'required',
             'perihal' => 'required',
             'isi_surat' => 'nullable',
+            'file' => 'nullable|mimes:pdf,doc,docx,jpg,jpeg,png|max:10240', // 10MB
         ]);
 
         if ($request->hasFile('file')) {
@@ -71,9 +73,11 @@ class SuratKeluarController extends Controller
             'no_surat' => 'required',
             'tanggal' => 'required|date',
             'sifat_surat' => 'required',
-            'tujuan' => 'required',
+            'pengirim' => 'required',
+            'tertuj' => 'required',
             'perihal' => 'required',
             'isi_surat' => 'nullable',
+            'file' => 'nullable|mimes:pdf,doc,docx,jpg,jpeg,png|max:10240', // 10MB
         ]);
 
         if ($request->hasFile('file')) {

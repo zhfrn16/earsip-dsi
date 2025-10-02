@@ -19,13 +19,13 @@
       <li class="nav-item dropdown">
         <a href="#" class="nav-link has-dropdown"><i class="fas fa-file-alt"></i><span>Dokumen</span></a>
         <ul class="dropdown-menu">
-          <li><a class="nav-link" href="{{ route('dataArsip.index') }}">List Dokumen</a></li>
-          <li><a class="nav-link" href="{{ route('dataArsip.create') }}">Tambah Dokumen</a></li>
+          <li><a class="nav-link" href="{{ route('dokumen.index') }}">List Dokumen</a></li>
+          <li><a class="nav-link" href="{{ route('dokumen.create') }}">Tambah Dokumen</a></li>
         </ul>
       </li>
       @endif
 
-      <li class="menu-header">Surat</li>
+      {{-- <li class="menu-header">Surat</li>
       <li class="nav-item dropdown">
         <a href="#" class="nav-link has-dropdown"><i class="fas fa-envelope"></i><span>Surat Masuk</span></a>
         <ul class="dropdown-menu">
@@ -40,7 +40,7 @@
           <li><a class="nav-link" href="{{ route('surat-keluar.index') }}">List Surat Keluar</a></li>
           <li><a class="nav-link" href="{{ route('surat-keluar.create') }}">Buat Pengajuan</a></li>
         </ul>
-      </li>
+      </li> --}}
 
       @if (auth()->user()->id_role == 1)
       <li class="menu-header">User Management</li>

@@ -137,8 +137,9 @@
                                     <label for="file">File Surat</label>
                                     <div class="custom-file">
                                         <input type="file" class="custom-file-input @error('file') is-invalid @enderror"
-                                               id="file" name="file" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png">
-                                        <label class="custom-file-label" for="file">Pilih file</label>
+                                               id="file" name="file" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"
+                                               onchange="updateFileName(this)">
+                                        <label class="custom-file-label" for="file" id="file-label">Pilih file</label>
                                     </div>
                                     <small class="form-text text-muted">
                                         File yang diizinkan: PDF, DOC, DOCX, JPG, JPEG, PNG. Maksimal 10MB.
@@ -184,12 +185,69 @@
 </div>
 
 @push('scripts')
+<style>
+    /* Fix for custom-file Bootstrap component */
+    .custom-file-label.selected {
+        color: #495057;
+    }
+    .custom-file-input:focus ~ .custom-file-label {
+        border-color: #80bdff;
+        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+    }
+</style>
 <script>
+    // Simple vanilla JavaScript function
+    function updateFileName(input) {
+        console.log('updateFileName called');
+        const fileName = input.files.length > 0 ? input.files[0].name : 'Pilih file';
+        console.log('Selected file:', fileName);
+
+        const label = document.getElementById('file-label');
+        if (label) {
+            label.textContent = fileName;
+            label.classList.add('selected');
+            console.log('Label updated to:', fileName);
+        }
+    }
+
     $(document).ready(function() {
-        // File input custom label
+        console.log('Document ready - surat masuk create');
+        console.log('jQuery version:', $.fn.jquery);
+        console.log('Custom file inputs found:', $('.custom-file-input').length);
+
+        // File input custom label - Enhanced version
+        $(document).on('change', '.custom-file-input', function() {
+            console.log('jQuery File input changed - Enhanced');
+            console.log('Input element:', this);
+            console.log('Files property:', this.files);
+
+            // Get filename
+            let fileName = 'Pilih file';
+            if (this.files && this.files.length > 0) {
+                fileName = this.files[0].name;
+                console.log('File selected via files property:', fileName);
+            } else {
+                let fullPath = $(this).val();
+                console.log('Full path from val():', fullPath);
+                if (fullPath) {
+                    fileName = fullPath.replace(/C:\\fakepath\\/i, '');
+                    console.log('Processed filename:', fileName);
+                }
+            }
+
+            console.log('Final filename to display:', fileName);
+
+            // Update label
+            const label = $(this).siblings('.custom-file-label');
+            console.log('Label element:', label);
+            label.addClass("selected").html(fileName);
+
+            console.log('jQuery Label updated successfully');
+        });
+
+        // Test direct event binding too
         $('.custom-file-input').on('change', function() {
-            let fileName = $(this).val().split('\\').pop();
-            $(this).next('.custom-file-label').addClass("selected").html(fileName);
+            console.log('Direct binding also triggered');
         });
 
         // Select2 for dropdowns
@@ -199,6 +257,8 @@
             },
             allowClear: false
         });
+
+        console.log('All scripts loaded');
     });
 </script>
 @endpush

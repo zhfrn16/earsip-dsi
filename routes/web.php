@@ -42,6 +42,10 @@ Route::resource('jenisDokumen', JDController::class);
 // Route DataArsip
 Route::resource('dataArsip', DataArsipController::class);
 
+// Route Dokumen
+Route::resource('dokumen', 'DokumenController');
+Route::get('dokumen/{id}/download', 'DokumenController@download')->name('dokumen.download');
+
 // Route Surat Masuk
 Route::resource('surat-masuk', 'SuratMasukController');
 Route::get('/surat-masuk/export', 'SuratMasukController@export')->name('surat-masuk.export');

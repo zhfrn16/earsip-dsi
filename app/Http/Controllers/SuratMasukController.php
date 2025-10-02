@@ -34,6 +34,7 @@ class SuratMasukController extends Controller
             'pengirim' => 'required',
             'perihal' => 'required',
             'isi_surat' => 'nullable',
+            'file' => 'nullable|mimes:pdf,doc,docx,jpg,jpeg,png|max:10240', // 10MB
         ]);
 
         if ($request->hasFile('file')) {
@@ -67,6 +68,7 @@ class SuratMasukController extends Controller
             'pengirim' => 'required',
             'perihal' => 'required',
             'isi_surat' => 'nullable',
+            'file' => 'nullable|mimes:pdf,doc,docx,jpg,jpeg,png|max:10240', // 10MB
         ]);
 
         if ($request->hasFile('file')) {

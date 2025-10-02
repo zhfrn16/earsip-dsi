@@ -1,7 +1,7 @@
 @extends('layouts.app2')
 
-@section('title', 'User Management | e-Arsip DSI')
-@section('judul', 'User Management')
+{{-- @section('title', 'User Management | e-Arsip DSI') --}}
+{{-- @section('judul', 'User Management') --}}
 
 @section('content')
 <div class="section-header">

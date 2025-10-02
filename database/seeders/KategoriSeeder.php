@@ -14,7 +14,7 @@ class KategoriSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('kategori')->insert([
+        $kategoris = [
             [
                 'id_kategori' => 'KT001',
                 'nama_kategori' => 'Dokumen Administratif',
@@ -47,9 +47,17 @@ class KategoriSeeder extends Seeder
                 'id_kategori' => 'KT005',
                 'nama_kategori' => 'Dokumen Lainnya',
                 'deskripsi' => 'Kategori dokumen lainnya',
-                'created_at' => now(),
-                'updated_at' => now()
             ]
-        ]);
+        ];
+
+        foreach ($kategoris as $kategori) {
+            DB::table('kategori')->updateOrInsert(
+                ['id_kategori' => $kategori['id_kategori']],
+                array_merge($kategori, [
+                    'created_at' => now(),
+                    'updated_at' => now()
+                ])
+            );
+        }
     }
 }

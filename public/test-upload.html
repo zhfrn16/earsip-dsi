@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test File Upload</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>Test File Upload</h2>
+
+        <div class="form-group">
+            <label for="file">File Upload Test</label>
+            <div class="custom-file">
+                <input type="file" class="custom-file-input" id="file" name="file" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png">
+                <label class="custom-file-label" for="file">Pilih file</label>
+            </div>
+        </div>
+
+        <div id="debug-info" class="mt-3"></div>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            console.log('jQuery ready');
+
+            // Method 1: Basic event binding
+            $('.custom-file-input').on('change', function() {
+                console.log('Method 1: File changed');
+                let fileName = $(this).val().split('\\').pop();
+                $(this).next('.custom-file-label').addClass("selected").html(fileName);
+                $('#debug-info').append('<p>Method 1: ' + fileName + '</p>');
+            });
+
+            // Method 2: Event delegation
+            $(document).on('change', '.custom-file-input', function() {
+                console.log('Method 2: File changed (delegation)');
+                let fileName = 'No file';
+                if (this.files && this.files.length > 0) {
+                    fileName = this.files[0].name;
+                }
+                $('#debug-info').append('<p>Method 2: ' + fileName + '</p>');
+            });
+
+            // Method 3: Native JavaScript
+            document.getElementById('file').addEventListener('change', function() {
+                console.log('Method 3: Native JS');
+                let fileName = this.files.length > 0 ? this.files[0].name : 'No file';
+                $('#debug-info').append('<p>Method 3: ' + fileName + '</p>');
+            });
+        });
+    </script>
+</body>
+</html>

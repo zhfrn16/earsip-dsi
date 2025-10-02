@@ -14,51 +14,109 @@ class DokumenSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('dokumen')->insert([
+        $dokumens = [
+            // Surat Masuk
             [
                 'id_dokumen' => 'DOK01',
+                'jenis_surat' => 'surat_masuk',
                 'id_kategori' => 'KT001',
                 'nama_dokumen' => 'Surat Keputusan Direktur',
                 'no_dokumen' => 'SK/001/2025',
                 'tahun' => 2025,
-                'deskripsi' => 'Surat keputusan mengenai kebijakan perusahaan',
+                'deskripsi' => 'Surat keputusan mengenai kebijakan perusahaan dari Kementerian Keuangan',
                 'file_dokumen' => null,
+                'file' => null, // Will be uploaded later
                 'created_at' => now(),
                 'updated_at' => now()
             ],
             [
                 'id_dokumen' => 'DOK02',
+                'jenis_surat' => 'surat_masuk',
                 'id_kategori' => 'KT002',
-                'nama_dokumen' => 'Laporan Keuangan Bulanan',
-                'no_dokumen' => 'LKB/09/2025',
+                'nama_dokumen' => 'Proposal Kerja Sama',
+                'no_dokumen' => 'PKS/002/2025',
                 'tahun' => 2025,
-                'deskripsi' => 'Laporan keuangan untuk bulan September 2025',
+                'deskripsi' => 'Proposal kerja sama dari perusahaan partner',
                 'file_dokumen' => null,
+                'file' => null,
                 'created_at' => now(),
                 'updated_at' => now()
             ],
             [
                 'id_dokumen' => 'DOK03',
+                'jenis_surat' => 'surat_masuk',
                 'id_kategori' => 'KT003',
-                'nama_dokumen' => 'Kontrak Kerja Karyawan',
-                'no_dokumen' => 'KK/100/2025',
+                'nama_dokumen' => 'Laporan Audit Sistem',
+                'no_dokumen' => 'LAS/003/2025',
                 'tahun' => 2025,
-                'deskripsi' => 'Kontrak kerja untuk karyawan baru',
+                'deskripsi' => 'Laporan audit sistem dari auditor internal',
                 'file_dokumen' => null,
+                'file' => null,
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            // Surat Keluar
+            [
+                'id_dokumen' => 'DOK04',
+                'jenis_surat' => 'surat_keluar',
+                'id_kategori' => 'KT001',
+                'nama_dokumen' => 'Pemberitahuan Kebijakan Baru',
+                'no_dokumen' => 'PKB/004/2025',
+                'tahun' => 2025,
+                'deskripsi' => 'Pemberitahuan kebijakan baru perusahaan kepada seluruh karyawan',
+                'file_dokumen' => null,
+                'file' => null,
                 'created_at' => now(),
                 'updated_at' => now()
             ],
             [
-                'id_dokumen' => 'DOK04',
+                'id_dokumen' => 'DOK05',
+                'jenis_surat' => 'surat_keluar',
+                'id_kategori' => 'KT002',
+                'nama_dokumen' => 'Laporan Keuangan Bulanan',
+                'no_dokumen' => 'LKB/005/2025',
+                'tahun' => 2025,
+                'deskripsi' => 'Laporan keuangan bulanan untuk direktur utama',
+                'file_dokumen' => null,
+                'file' => null,
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'id_dokumen' => 'DOK06',
+                'jenis_surat' => 'surat_keluar',
+                'id_kategori' => 'KT003',
+                'nama_dokumen' => 'Kontrak Kerja Karyawan Baru',
+                'no_dokumen' => 'KK/006/2025',
+                'tahun' => 2025,
+                'deskripsi' => 'Kontrak kerja untuk karyawan baru',
+                'file_dokumen' => null,
+                'file' => null,
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            // Dokumen Umum (tanpa jenis surat)
+            [
+                'id_dokumen' => 'DOK07',
+                'jenis_surat' => null,
                 'id_kategori' => 'KT004',
                 'nama_dokumen' => 'Spesifikasi Teknis Sistem',
-                'no_dokumen' => 'STS/01/2025',
+                'no_dokumen' => 'STS/007/2025',
                 'tahun' => 2025,
                 'deskripsi' => 'Spesifikasi teknis untuk pengembangan sistem e-Arsip',
                 'file_dokumen' => null,
-                'created_at' => now(),
-                'updated_at' => now()
+                'file' => null,
             ]
-        ]);
+        ];
+
+        foreach ($dokumens as $dokumen) {
+            DB::table('dokumen')->updateOrInsert(
+                ['id_dokumen' => $dokumen['id_dokumen']],
+                array_merge($dokumen, [
+                    'created_at' => now(),
+                    'updated_at' => now()
+                ])
+            );
+        }
     }
 }
