@@ -98,7 +98,7 @@
     };
 </script>
   <script src="{{ url('js/app2.js') }}"></script>
-  @stack('script')
+  @stack('scripts')
   <script src="{{ url('stisla/assets/js/page/index.js') }}"></script>
 </body>
 </html>
