@@ -11,6 +11,32 @@ use Illuminate\Support\Facades\Storage;
 
 class DokumenController extends Controller
 {
+    /**
+     * Generate next available document ID
+     */
+    private function generateNextId()
+    {
+        // Get all existing IDs and find the highest number
+        $existingIds = Dokumen::pluck('id_dokumen')
+            ->filter(function($id) {
+                return preg_match('/^DOK\d+$/', $id);
+            })
+            ->map(function($id) {
+                return intval(substr($id, 3));
+            })
+            ->sort()
+            ->values();
+
+        if ($existingIds->isEmpty()) {
+            return 'DOK01';
+        }
+
+        $nextNumber = $existingIds->max() + 1;
+
+        // Format as DOK + zero-padded number
+        return 'DOK' . str_pad($nextNumber, 2, '0', STR_PAD_LEFT);
+    }
+
     public function index(Request $request)
     {
         $query = Dokumen::with(['kategori', 'suratMasuk', 'suratKeluar']);
@@ -63,13 +89,15 @@ class DokumenController extends Controller
         // Ensure we always have a collection, even if empty
         $kategoris = $kategoris ?: collect();
 
-        return view('dokumen.create', compact('kategoris'));
+        // Get next available ID for preview
+        $nextId = $this->generateNextId();
+
+        return view('dokumen.create', compact('kategoris', 'nextId'));
     }
 
     public function store(Request $request)
     {
         $rules = [
-            'id_dokumen' => 'required|unique:dokumen,id_dokumen',
             'id_kategori' => 'required|exists:kategori,id_kategori',
             'nama_dokumen' => 'required|string|max:100',
             'no_dokumen' => 'required',
@@ -86,6 +114,12 @@ class DokumenController extends Controller
         }
 
         $validated = $request->validate($rules);
+
+        // Generate next document ID with retry logic for race conditions
+        do {
+            $validated['id_dokumen'] = $this->generateNextId();
+            $exists = Dokumen::where('id_dokumen', $validated['id_dokumen'])->exists();
+        } while ($exists);
 
         // Handle file upload
         if ($request->hasFile('file')) {

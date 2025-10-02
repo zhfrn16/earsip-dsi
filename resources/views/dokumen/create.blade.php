@@ -16,15 +16,9 @@
                     <form action="{{ route('dokumen.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
 
-                        <div class="form-group">
-                            <label for="id_dokumen">ID Dokumen <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control @error('id_dokumen') is-invalid @enderror"
-                                   id="id_dokumen" name="id_dokumen" value="{{ old('id_dokumen') }}" required>
-                            @error('id_dokumen')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
+                        <div class="alert alert-info">
+                            <i class="fas fa-info-circle"></i>
+                            <strong>ID Dokumen:</strong> <code>{{ $nextId ?? 'DOK##' }}</code> <small class="text-muted">(akan dibuat otomatis)</small>
                         </div>
 
                         <div class="form-group">
