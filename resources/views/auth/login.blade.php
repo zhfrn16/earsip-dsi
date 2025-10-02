@@ -35,9 +35,9 @@
                         {{ __('Forgot your password?') }}
                     </a>
                 @endif --}}
-                @if (Route::has('register'))
+                {{-- @if (Route::has('register'))
                     <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 underline">Register</a>
-                @endif
+                @endif --}}
 
                 <x-jet-button class="ml-4">
                     {{ __('Login') }}
