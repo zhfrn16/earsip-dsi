@@ -119,11 +119,13 @@
                                                class="btn btn-sm btn-info" title="Detail">
                                                 <i class="fas fa-eye"></i>
                                             </a>
-                                            @if($user->id_user != auth()->user()->id_user)
+                                            @if($user->id_user != auth()->user()->id_user || auth()->user()->id_role == 1)
                                             <a href="{{ route('users.edit', $user->id_user) }}"
                                                class="btn btn-sm btn-warning" title="Edit">
                                                 <i class="fas fa-edit"></i>
                                             </a>
+                                            @endif
+                                            @if($user->id_user != auth()->user()->id_user)
                                             <button type="button" class="btn btn-sm btn-danger" title="Hapus"
                                                     onclick="confirmDelete('{{ $user->id_user }}', '{{ $user->nama_lengkap }}')">
                                                 <i class="fas fa-trash"></i>

@@ -21,13 +21,9 @@
                     <h4>Informasi User</h4>
                     <div class="card-header-action">
                         <div class="btn-group">
-                            @if($user->id_user != auth()->user()->id_user && auth()->user()->id_role == 1)
+                            @if($user->id_user != auth()->user()->id_user || auth()->user()->id_role == 1)
                             <a href="{{ route('users.edit', $user->id_user) }}" class="btn btn-warning">
                                 <i class="fas fa-edit"></i> Edit
-                            </a>
-                            @elseif($user->id_user == auth()->user()->id_user)
-                            <a href="{{ route('profile.show') }}" class="btn btn-primary">
-                                <i class="fas fa-user-cog"></i> Edit Profile
                             </a>
                             @endif
                             <a href="{{ route('users.index') }}" class="btn btn-secondary">
