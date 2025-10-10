@@ -106,7 +106,7 @@
                                     <th>Kategori</th>
                                     <th>Jenis</th>
                                     <th>File</th>
-                                    <th>Deskripsi</th>
+                                    <th>Perihal</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>

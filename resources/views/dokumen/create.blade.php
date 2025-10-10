@@ -126,7 +126,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="deskripsi">Deskripsi</label>
+                            <label for="deskripsi">Perihal</label>
                             <textarea class="form-control @error('deskripsi') is-invalid @enderror"
                                       id="deskripsi" name="deskripsi" rows="3">{{ old('deskripsi') }}</textarea>
                             @error('deskripsi')
