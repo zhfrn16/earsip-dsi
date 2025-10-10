@@ -14,9 +14,15 @@ if (!function_exists('formatBytes')) {
         }
 
         $units = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB'];
-        $base = log($bytes, 1024);
 
-        return round(pow(1024, $base - floor($base)), $precision) . ' ' . $units[floor($base)];
+        // More robust approach that works across PHP versions
+        $i = 0;
+        while ($bytes >= 1024 && $i < count($units) - 1) {
+            $bytes /= 1024;
+            $i++;
+        }
+
+        return round($bytes, $precision) . ' ' . $units[$i];
     }
 }
 

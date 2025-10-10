@@ -107,7 +107,23 @@
                                                 <div>
                                                     <div>{{ basename($dokumen->file) }}</div>
                                                     @if(Storage::disk('public')->exists($dokumen->file))
-                                                        <small class="text-muted">{{ formatBytes(Storage::disk('public')->size($dokumen->file)) }}</small>
+                                                        @php
+                                                            $fileSize = Storage::disk('public')->size($dokumen->file);
+                                                            if (function_exists('formatBytes')) {
+                                                                $formattedSize = formatBytes($fileSize);
+                                                            } else {
+                                                                // Fallback function for PHP compatibility
+                                                                $units = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
+                                                                $i = 0;
+                                                                $size = $fileSize;
+                                                                while ($size >= 1024 && $i < count($units) - 1) {
+                                                                    $size /= 1024;
+                                                                    $i++;
+                                                                }
+                                                                $formattedSize = round($size, 2) . ' ' . $units[$i];
+                                                            }
+                                                        @endphp
+                                                        <small class="text-muted">{{ $formattedSize }}</small>
                                                     @endif
                                                 </div>
                                             </div>
