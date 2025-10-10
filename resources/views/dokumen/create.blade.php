@@ -33,7 +33,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="no_dokumen">No Dokumen <span class="text-danger">*</span></label>
+                            <label for="no_dokumen">No Surat <span class="text-danger">*</span></label>
                             <input type="text" class="form-control @error('no_dokumen') is-invalid @enderror"
                                    id="no_dokumen" name="no_dokumen" value="{{ old('no_dokumen') }}" required>
                             @error('no_dokumen')

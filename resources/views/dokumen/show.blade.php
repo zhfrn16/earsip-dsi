@@ -52,7 +52,7 @@
                                     <td><strong>{{ $dokumen->nama_dokumen }}</strong></td>
                                 </tr>
                                 <tr>
-                                    <td class="font-weight-bold">No Dokumen</td>
+                                    <td class="font-weight-bold">No Surat</td>
                                     <td>:</td>
                                     <td>{{ $dokumen->no_dokumen }}</td>
                                 </tr>

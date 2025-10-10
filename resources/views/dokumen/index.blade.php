@@ -101,7 +101,7 @@
                                     <th>No</th>
                                     <th>ID Dokumen</th>
                                     <th>Nama Dokumen</th>
-                                    <th>No Dokumen</th>
+                                    <th>No Surat</th>
                                     <th>Tahun</th>
                                     <th>Kategori</th>
                                     <th>Jenis</th>
