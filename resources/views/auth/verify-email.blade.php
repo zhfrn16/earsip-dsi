@@ -1,7 +1,10 @@
 <x-guest-layout>
     <x-jet-authentication-card>
         <x-slot name="logo">
-            <x-jet-authentication-card-logo />
+            <div class="text-center">
+                <h1 class="text-4xl font-bold text-gray-800 mb-2">eArsip DSI</h1>
+                <p class="text-sm text-gray-600">Sistem Informasi Arsip Digital</p>
+            </div>
         </x-slot>
 
         <div class="mb-4 text-sm text-gray-600">
