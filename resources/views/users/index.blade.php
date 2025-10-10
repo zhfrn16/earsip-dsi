@@ -128,11 +128,6 @@
                                                     onclick="confirmDelete('{{ $user->id_user }}', '{{ $user->nama_lengkap }}')">
                                                 <i class="fas fa-trash"></i>
                                             </button>
-                                            @else
-                                            <a href="{{ route('profile.show') }}"
-                                               class="btn btn-sm btn-primary" title="Profile">
-                                                <i class="fas fa-user-cog"></i>
-                                            </a>
                                             @endif
                                         </div>
                                     </td>

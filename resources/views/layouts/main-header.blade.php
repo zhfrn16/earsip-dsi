@@ -14,7 +14,7 @@
       @endif
         <div class="d-sm-none d-lg-inline-block">{{ Auth::user()->name }}</div></a>
         <div class="dropdown-menu dropdown-menu-right">
-          <form action="{{ route('profile.show') }}" method="get">
+          <form action="{{ route('users.show', $user->id_user) }}" method="get">
             <button type="submit" class="dropdown-item has-icon">Profile</button>
           </form>
         <form action="{{ route('logout') }}" method="post">
