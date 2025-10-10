@@ -151,7 +151,7 @@
                                     @endif
                                 </label>
                             </div>
-                            <small class="form-text text-muted">Format yang diizinkan: PDF, DOC, DOCX, JPG, JPEG, PNG. Maksimal 10MB. {{ $dokumen->file ? 'Kosongkan jika tidak ingin mengubah file.' : '' }}</small>
+                            <small class="form-text text-muted">Format yang diizinkan: PDF. Maksimal 10MB. {{ $dokumen->file ? 'Kosongkan jika tidak ingin mengubah file.' : '' }}</small>
                             @error('file')
                                 <div class="invalid-feedback">
                                     {{ $message }}

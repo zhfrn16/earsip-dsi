@@ -117,7 +117,7 @@
                                        id="file" name="file" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png">
                                 <label class="custom-file-label" for="file">Pilih file...</label>
                             </div>
-                            <small class="form-text text-muted">Format yang diizinkan: PDF, DOC, DOCX, JPG, JPEG, PNG. Maksimal 10MB.</small>
+                            <small class="form-text text-muted">Format yang diizinkan: PDF. Maksimal 10MB.</small>
                             @error('file')
                                 <div class="invalid-feedback">
                                     {{ $message }}
