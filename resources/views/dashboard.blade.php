@@ -1,5 +1,5 @@
 @extends('layouts/app2')
-@section('title', 'Dashboard | SiArsip')
+@section('title', 'Dashboard | e-Arsip DSI')
 @section('judul', 'Dashboard')
 @section('content')
 <section class="section">

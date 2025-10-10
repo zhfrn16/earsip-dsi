@@ -148,6 +148,7 @@
     </div>
 </div>
 
+</section>
 
 
 <!-- Delete Form -->
@@ -155,7 +156,6 @@
     @csrf
     @method('DELETE')
 </form>
-
 @push('scripts')
 <script>
     $(document).ready(function() {

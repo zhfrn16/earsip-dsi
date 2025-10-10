@@ -6,11 +6,6 @@
 @section('content')
 <div class="section-header">
     <h1>Detail Dokumen</h1>
-    <div class="section-header-breadcrumb">
-        <div class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></div>
-        <div class="breadcrumb-item"><a href="{{ route('dokumen.index') }}">Dokumen</a></div>
-        <div class="breadcrumb-item active">Detail</div>
-    </div>
 </div>
 
 <div class="section-body">
@@ -221,5 +216,5 @@
     @endif
 </div>
 
-
+</section>
 @endsection

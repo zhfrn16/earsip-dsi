@@ -150,7 +150,7 @@
         </div>
     </div>
 </div>
-
+</section>
 @push('scripts')
 <!-- Ensure jQuery and Select2 are loaded before this script -->
 <script>
