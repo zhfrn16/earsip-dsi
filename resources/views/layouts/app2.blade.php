@@ -28,7 +28,7 @@
     <link rel="preload" href="{{ url('stisla/assets/js/stisla.js') }}" as="script">
     <link rel="preload" href="{{ url('stisla/assets/js/scripts.js') }}" as="script">
     <link rel="preload" href="{{ url('js/app2.js') }}" as="script">
-    <link rel="preload" href="{{ url('stisla/assets/js/page/index.js') }}" as="script">
+    {{-- <link rel="preload" href="{{ url('stisla/assets/js/page/index.js') }}" as="script"> --}}
   <!-- General CSS Files -->
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.10.22/b-1.6.5/b-flash-1.6.5/b-html5-1.6.5/b-print-1.6.5/cr-1.5.2/fc-3.3.1/fh-3.1.7/kt-2.5.3/r-2.2.6/rg-1.1.2/rr-1.2.7/sc-2.0.3/sb-1.0.0/sp-1.2.1/sl-1.3.1/datatables.min.css"/>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -122,6 +122,6 @@
 </script>
   <script src="{{ url('js/app2.js') }}"></script>
   @stack('scripts')
-  <script src="{{ url('stisla/assets/js/page/index.js') }}"></script>
+  {{-- <script src="{{ url('stisla/assets/js/page/index.js') }}"></script> --}}
 </body>
 </html>

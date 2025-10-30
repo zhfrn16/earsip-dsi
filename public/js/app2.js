@@ -182,68 +182,68 @@ $(document).ready(function(){
 });
 
 // fungsi untuk auto fill form batch
-function batchFunction() 
-  { 
-    if (document.getElementById('cek').checked) 
-    { 
+function batchFunction()
+  {
+    if (document.getElementById('cek').checked)
+    {
       for(let i = 0; i<100; i++){
-        document.getElementsByClassName('newBatch')[i].value=document.getElementById('batch').value; 
+        document.getElementsByClassName('newBatch')[i].value=document.getElementById('batch').value;
         document.getElementsByClassName('newYear')[i].value=document.getElementById('tahun').value;
       }
-    } 
+    }
     else
-    { 
-      document.getElementById('newBatch').value=""; 
-      document.getElementById('newYear').value=""; 
-    } 
-  } 
+    {
+      document.getElementById('newBatch').value="";
+      document.getElementById('newYear').value="";
+    }
+  }
 
 // fungsi untuk auto fill form rak
-function rakFunction() 
-  { 
-    if (document.getElementById('selected').checked) 
-    { 
+function rakFunction()
+  {
+    if (document.getElementById('selected').checked)
+    {
       for(let i = 0; i<100; i++){
-        document.getElementsByClassName('newRak')[i].value=document.getElementById('rak').value; 
+        document.getElementsByClassName('newRak')[i].value=document.getElementById('rak').value;
         document.getElementsByClassName('newBox')[i].value=document.getElementById('tahun').value;
         document.getElementsByClassName('newBatch')[i].value=document.getElementById('batch').value;
       }
-    } 
+    }
     else
-    { 
-      document.getElementById('newRak').value=""; 
-      document.getElementById('newBox').value=""; 
-      document.getElementById('newBatch').value=""; 
-    } 
-  } 
+    {
+      document.getElementById('newRak').value="";
+      document.getElementById('newBox').value="";
+      document.getElementById('newBatch').value="";
+    }
+  }
 
 // fungsi untuk auto fill form peminjaman
-function pinjamFunction() 
-  { 
-    if (document.getElementById('selectData').checked) 
-    { 
+function pinjamFunction()
+  {
+    if (document.getElementById('selectData').checked)
+    {
       for(let i = 0; i<100; i++){
-        document.getElementsByClassName('newNama')[i].value=document.getElementById('nama').value; 
+        document.getElementsByClassName('newNama')[i].value=document.getElementById('nama').value;
         document.getElementsByClassName('newSeksi')[i].value=document.getElementById('seksi').value;
         document.getElementsByClassName('newTanggal')[i].value=document.getElementById('tanggal').value;
         document.getElementsByClassName('newNoND')[i].value=document.getElementById('noND').value;
         document.getElementsByClassName('newTanggalND')[i].value=document.getElementById('tanggalND').value;
       }
-    } 
+    }
     else
-    { 
-      document.getElementById('newRak').value=""; 
-      document.getElementById('newBox').value=""; 
-      document.getElementById('newBatch').value=""; 
-    } 
-  } 
+    {
+      document.getElementById('newRak').value="";
+      document.getElementById('newBox').value="";
+      document.getElementById('newBatch').value="";
+    }
+  }
 
 // Autocomplete in form dinamis for Arsip
 var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
 $(document).ready(function(){
     $( "#noDok" ).autocomplete({
         source: function( request, response ) {
-            let tahunArsip = value=document.getElementById('tahunArsip').value; 
+            let tahunArsip = value=document.getElementById('tahunArsip').value;
             console.log(request.term)
         $.ajax({
             // url from global config in app2.blade.php
@@ -269,7 +269,7 @@ $(document).ready(function(){
         }
     });
 });
-  
+
   $(document).ready(function(){
     var count = 1;
     $('button#add').click(function(event){
@@ -294,7 +294,7 @@ $(document).ready(function(){
       $(field).appendTo(tambahkotak)
       $('.noDok').autocomplete({
               source: function( request, response ) {
-              let tahunArsip = value=document.getElementById('tahunArsip').value; 
+              let tahunArsip = value=document.getElementById('tahunArsip').value;
                   console.log(request.term)
               $.ajax({
                   url:config.routes.zone,
@@ -323,15 +323,15 @@ $(document).ready(function(){
 
     $('body').on('click','#remove',function(){
       count--
-		$(this).parents('tr#newRow').remove();	
-	});		  
+		$(this).parents('tr#newRow').remove();
+	});
 });
 
 // Autocomplete in form dinamis for Peminjaman
 $(document).ready(function(){
     $( "#noPen" ).autocomplete({
         source: function( request, response ) {
-          let tahunArsip = value=document.getElementById('tahunArsip').value; 
+          let tahunArsip = value=document.getElementById('tahunArsip').value;
             console.log(request.term)
         $.ajax({
             // url from global config in app2.blade.php
@@ -384,7 +384,7 @@ $(document).ready(function(){
         }
     });
 });
-  
+
   $(document).ready(function(){
     var count = 1;
     $('button#tambahPinjam').click(function(event){
@@ -412,7 +412,7 @@ $(document).ready(function(){
       $(field).appendTo(tambahkotak)
       $('.noDok').autocomplete({
               source: function( request, response ) {
-              let tahunArsip = value=document.getElementById('tahunArsip').value; 
+              let tahunArsip = value=document.getElementById('tahunArsip').value;
                   console.log(request.term)
               $.ajax({
                   url:config.routes.arsip,
@@ -442,8 +442,8 @@ $(document).ready(function(){
 
     $('body').on('click','#remove',function(){
       count--
-		$(this).parents('tr#newRow').remove();	
-	});		  
+		$(this).parents('tr#newRow').remove();
+	});
 });
 
 // form dinamis dengan select2 untuk form serah terima
@@ -482,8 +482,8 @@ $(document).ready(function(){
     });
     $('body').on('click','#remove',function(){
         count--
-		$(this).parents('tr#rowForm').remove();	
-	});		  
+		$(this).parents('tr#rowForm').remove();
+	});
 });
 
 // Fungsi Filter Arsip
@@ -525,7 +525,7 @@ const tablePeminjaman = $('#peminjaman').DataTable({
     type: "post",
     headers: {
       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    },  
+    },
     data: function(d){
       d.month = monthPinjam;
       d.year = yearPinjam;
@@ -586,7 +586,7 @@ $(".filterDokumen").on('change', function(){
 $( "#searchND" ).click(function() {
   let nd = $('#cek_no_nd').val();
   $.ajax
-    ({ 
+    ({
         url: `/get/nd/${nd}`,
         success: function(result)
         {
@@ -672,7 +672,7 @@ $( "#konfirmasi" ).click(function() {
                   'Data telah terkonfirmasi.',
                   'success'
                 );
-                setInterval(function(res){ 
+                setInterval(function(res){
                   location.reload();
               }, 1000);
               } else {
@@ -696,7 +696,7 @@ $( "#cariArsip" ).click(function() {
   let batch = $('#batch').val();
   let tahun = $('#tahun').val();
   $.ajax
-    ({ 
+    ({
         url: `/get/arsip/${rak}/${box}/${batch}/${tahun}`,
         success: function(result)
         {
@@ -751,4 +751,4 @@ $( "#cariArsip" ).click(function() {
 });
 
 let today = new Date().toISOString().slice(0, 10);
-document.getElementById('tanggal').value=today;
+// document.getElementById('tanggal').value=today;
