@@ -111,10 +111,10 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="file">File Dokumen</label>
+                            <label for="file">File Dokumen <span class="text-danger">*</span></label>
                             <div class="custom-file">
                                 <input type="file" class="custom-file-input @error('file') is-invalid @enderror"
-                                       id="file" name="file" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png">
+                                       id="file" name="file" accept=".pdf" required>
                                 <label class="custom-file-label" for="file">Pilih file...</label>
                             </div>
                             <small class="form-text text-muted">Format yang diizinkan: PDF. Maksimal 10MB.</small>
@@ -126,9 +126,9 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="deskripsi">Perihal</label>
+                            <label for="deskripsi">Perihal <span class="text-danger">*</span></label>
                             <textarea class="form-control @error('deskripsi') is-invalid @enderror"
-                                      id="deskripsi" name="deskripsi" rows="3">{{ old('deskripsi') }}</textarea>
+                                      id="deskripsi" name="deskripsi" rows="3" required>{{ old('deskripsi') }}</textarea>
                             @error('deskripsi')
                                 <div class="invalid-feedback">
                                     {{ $message }}
@@ -151,22 +151,27 @@
     </div>
 </div>
 </section>
+@push('styles')
+<style>
+    /* Enhanced styling for native select */
+    #id_kategori, #jenis_surat {
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+        background-position: right 0.5rem center;
+        background-repeat: no-repeat;
+        background-size: 1.5em 1.5em;
+        padding-right: 2.5rem;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+    }
+</style>
+@endpush
+
 @push('scripts')
-<!-- Ensure jQuery and Select2 are loaded before this script -->
 <script>
     $(document).ready(function() {
-        if (typeof $.fn.select2 === 'undefined') {
-            console.error('Select2 is not loaded. Please include Select2 JS and CSS.');
-        } else {
-            $('#id_kategori').select2({
-                placeholder: "-- Pilih Kategori --",
-                allowClear: true
-            });
-        }
-
         // Handle jenis surat change
         $('#jenis_surat').change(function() {
-            console.log('Jenis surat changed:', $(this).val());
             var jenisSurat = $(this).val();
 
             if (jenisSurat === 'surat_masuk') {

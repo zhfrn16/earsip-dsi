@@ -102,8 +102,8 @@ class DokumenController extends Controller
             'nama_dokumen' => 'required|string|max:100',
             'no_dokumen' => 'required',
             'tahun' => 'required|integer',
-            'deskripsi' => 'nullable',
-            'file' => 'nullable|file|mimes:pdf|max:10240', // Max 10MB
+            'deskripsi' => 'required|string|max:500',
+            'file' => 'required|file|mimes:pdf|max:10240', // Max 10MB
             'jenis_surat' => 'nullable|in:surat_masuk,surat_keluar',
         ];
 
@@ -168,7 +168,7 @@ class DokumenController extends Controller
             'nama_dokumen' => 'required|string|max:100',
             'no_dokumen' => 'required',
             'tahun' => 'required|integer',
-            'deskripsi' => 'nullable',
+            'deskripsi' => 'required|string|max:500',
             'file' => 'nullable|file|mimes:pdf|max:10240', // Max 10MB
             'jenis_surat' => 'nullable|in:surat_masuk,surat_keluar',
         ];
