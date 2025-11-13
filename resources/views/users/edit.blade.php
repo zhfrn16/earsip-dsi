@@ -177,7 +177,7 @@
                                     <small class="form-text text-muted">
                                         Status verifikasi email saat ini:
                                         @if($user->email_verified_at)
-                                            <span class="badge badge-success">Terverifikasi pada {{ \Carbon\Carbon::parse($user->email_verified_at)->format('d/m/Y H:i') }}</span>
+                                            <span class="badge badge-success">Terverifikasi pada {{ \Carbon\Carbon::parse($user->email_verified_at)->setTimezone('Asia/Jakarta')->format('d/m/Y H:i') }}</span>
                                         @else
                                             <span class="badge badge-warning">Belum terverifikasi</span>
                                         @endif

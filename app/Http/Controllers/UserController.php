@@ -48,8 +48,10 @@ class UserController extends Controller
         }
 
         // Handle email verification
-        if ($request->email_verified) {
+        if ($request->has('email_verified') && $request->email_verified == '1') {
             $data['email_verified_at'] = now();
+        } else {
+            $data['email_verified_at'] = null;
         }
 
         User::create($data);
@@ -94,10 +96,16 @@ class UserController extends Controller
         }
 
         // Handle email verification
-        if ($request->email_verified && !$user->email_verified_at) {
-            $data['email_verified_at'] = now();
-        } elseif (!$request->email_verified && $user->email_verified_at) {
-            $data['email_verified_at'] = null;
+        if ($request->has('email_verified') && $request->email_verified == '1') {
+            // Set as verified if checkbox is checked
+            if (!$user->email_verified_at) {
+                $data['email_verified_at'] = now();
+            }
+        } else {
+            // Unverify if checkbox is unchecked
+            if ($user->email_verified_at) {
+                $data['email_verified_at'] = null;
+            }
         }
 
         $user->update($data);
