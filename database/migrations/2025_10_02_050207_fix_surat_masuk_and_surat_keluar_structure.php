@@ -22,7 +22,7 @@ class FixSuratMasukAndSuratKeluarStructure extends Migration
 
             // Add id_dokumen foreign key
             if (!Schema::hasColumn('surat_masuk', 'id_dokumen')) {
-                $table->string('id_dokumen', 5)->after('id');
+                $table->string('id_dokumen', 12)->after('id');
                 $table->foreign('id_dokumen')->references('id_dokumen')->on('dokumen')->onDelete('cascade');
             }
 
@@ -41,7 +41,7 @@ class FixSuratMasukAndSuratKeluarStructure extends Migration
 
             // Add id_dokumen foreign key
             if (!Schema::hasColumn('surat_keluar', 'id_dokumen')) {
-                $table->string('id_dokumen', 5)->after('id');
+                $table->string('id_dokumen', 12)->after('id');
                 $table->foreign('id_dokumen')->references('id_dokumen')->on('dokumen')->onDelete('cascade');
             }
 

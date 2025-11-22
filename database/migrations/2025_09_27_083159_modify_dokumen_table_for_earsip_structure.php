@@ -17,13 +17,13 @@ class ModifyDokumenTableForEarsipStructure extends Migration
         Schema::dropIfExists('dokumen');
 
         Schema::create('dokumen', function (Blueprint $table) {
-            $table->string('id_dokumen', 5)->primary();
+            $table->string('id_dokumen', 12)->primary();
             $table->string('id_kategori', 5);
             $table->string('nama_dokumen', 100);
             $table->string('no_dokumen', 10)->nullable();
             $table->integer('tahun')->nullable();
             $table->text('deskripsi')->nullable();
-            $table->string('file_dokumen')->nullable();
+            // $table->string('file_dokumen')->nullable();
             $table->timestamps();
 
             // Foreign key constraint
@@ -53,7 +53,7 @@ class ModifyDokumenTableForEarsipStructure extends Migration
             $table->string('no_dokumen');
             $table->string('tahun_dokumen');
             $table->string('keterangan')->nullable();
-            $table->string('file_dokumen')->nullable();
+            // $table->string('file_dokumen')->nullable();
             $table->timestamps();
         });
     }

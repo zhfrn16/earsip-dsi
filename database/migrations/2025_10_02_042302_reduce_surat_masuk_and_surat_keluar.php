@@ -105,7 +105,7 @@ class ReduceSuratMasukAndSuratKeluar extends Migration
         // Restore surat_masuk table structure
         Schema::table('surat_masuk', function (Blueprint $table) {
             $table->string('id_surat_masuk', 5)->primary();
-            $table->string('id_dokumen', 5);
+            $table->string('id_dokumen', 12);
             $table->unsignedBigInteger('id_user');
             $table->string('file', 255)->nullable();
             $table->string('no_surat', 20);
@@ -122,7 +122,7 @@ class ReduceSuratMasukAndSuratKeluar extends Migration
         // Restore surat_keluar table structure
         Schema::table('surat_keluar', function (Blueprint $table) {
             $table->string('id_surat_keluar', 5)->primary();
-            $table->string('id_dokumen', 5);
+            $table->string('id_dokumen', 12);
             $table->unsignedBigInteger('id_user');
             $table->string('file', 255)->nullable();
             $table->string('no_surat', 20);

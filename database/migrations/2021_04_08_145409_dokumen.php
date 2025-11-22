@@ -20,7 +20,7 @@ class Dokumen extends Migration
             $table->string('no_dokumen');
             $table->string('tahun_dokumen');
             $table->string('keterangan')->nullable();
-            $table->string('file_dokumen')->nullable();
+            // $table->string('file_dokumen')->nullable();
             $table->timestamps();
         });
     }

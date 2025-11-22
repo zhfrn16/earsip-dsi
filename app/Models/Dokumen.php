@@ -50,7 +50,6 @@ class Dokumen extends Model
         'no_dokumen',
         'tahun',
         'deskripsi',
-        'file_dokumen',
         'file',
         'jenis_surat'
     ];

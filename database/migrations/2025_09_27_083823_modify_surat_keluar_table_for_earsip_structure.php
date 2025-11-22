@@ -18,7 +18,7 @@ class ModifySuratKeluarTableForEarsipStructure extends Migration
 
         Schema::create('surat_keluar', function (Blueprint $table) {
             $table->string('id_surat_keluar', 5)->primary();
-            $table->string('id_dokumen', 5);
+            $table->string('id_dokumen', 12);
             $table->unsignedBigInteger('id_user');
             $table->string('file', 255)->nullable();
             $table->string('no_surat', 20);
