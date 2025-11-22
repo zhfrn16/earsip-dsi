@@ -87,8 +87,8 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="jenis_surat">Jenis Surat</label>
-                            <select class="form-control @error('jenis_surat') is-invalid @enderror" id="jenis_surat" name="jenis_surat">
+                            <label for="jenis_surat">Jenis Surat <span class="text-danger">*</span></label>
+                            <select class="form-control @error('jenis_surat') is-invalid @enderror" id="jenis_surat" name="jenis_surat" required>
                                 <option value="">-- Pilih Jenis Surat --</option>
                                 <option value="surat_masuk" {{ old('jenis_surat', $dokumen->jenis_surat) == 'surat_masuk' ? 'selected' : '' }}>Surat Masuk</option>
                                 <option value="surat_keluar" {{ old('jenis_surat', $dokumen->jenis_surat) == 'surat_keluar' ? 'selected' : '' }}>Surat Keluar</option>

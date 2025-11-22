@@ -104,7 +104,7 @@ class DokumenController extends Controller
             'tahun' => 'required|integer',
             'deskripsi' => 'required|string|max:500',
             'file' => 'required|file|mimes:pdf|max:10240', // Max 10MB
-            'jenis_surat' => 'nullable|in:surat_masuk,surat_keluar',
+            'jenis_surat' => 'required|in:surat_masuk,surat_keluar',
         ];
 
         if ($request->input('jenis_surat') === 'surat_masuk') {
@@ -170,7 +170,7 @@ class DokumenController extends Controller
             'tahun' => 'required|integer',
             'deskripsi' => 'required|string|max:500',
             'file' => 'nullable|file|mimes:pdf|max:10240', // Max 10MB
-            'jenis_surat' => 'nullable|in:surat_masuk,surat_keluar',
+            'jenis_surat' => 'required|in:surat_masuk,surat_keluar',
         ];
 
         if ($request->input('jenis_surat') === 'surat_masuk') {

@@ -139,8 +139,6 @@
                                             <span class="badge badge-success">Surat Masuk</span>
                                         @elseif($dokumen->jenis_surat == 'surat_keluar')
                                             <span class="badge badge-warning">Surat Keluar</span>
-                                        @else
-                                            <span class="badge badge-secondary">Dokumen Umum</span>
                                         @endif
                                     </td>
                                     <td>
