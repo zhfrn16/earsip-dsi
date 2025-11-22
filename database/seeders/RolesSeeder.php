@@ -22,10 +22,6 @@ class RolesSeeder extends Seeder
             [
                 'nama_role' => 'Operator',
                 'deskripsi' => 'Operator untuk input dan kelola data arsip',
-            ],
-            [
-                'nama_role' => 'User',
-                'deskripsi' => 'User biasa dengan akses terbatas',
             ]
         ];
 
