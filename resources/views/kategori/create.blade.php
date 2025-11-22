@@ -18,18 +18,9 @@
                 <div class="card-body">
                     <form action="{{ route('jenisDokumen.store') }}" method="POST">
                         @csrf
-
-                        <div class="form-group">
-                            <label for="id_kategori">ID Kategori <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control @error('id_kategori') is-invalid @enderror"
-                                   id="id_kategori" name="id_kategori" value="{{ old('id_kategori') }}"
-                                   maxlength="5" required>
-                            <small class="form-text text-muted">Maksimal 5 karakter</small>
-                            @error('id_kategori')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
+                        <div class="alert alert-info">
+                            <i class="fas fa-info-circle"></i>
+                            <strong>ID Kategori:</strong> <code>{{ $nextId ?? 'KT###' }}</code> <small class="">(akan dibuat otomatis)</small>
                         </div>
 
                         <div class="form-group">

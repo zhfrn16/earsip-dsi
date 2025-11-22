@@ -7,6 +7,28 @@ use Illuminate\Http\Request;
 
 class JDController extends Controller
 {
+    private function generateNextId()
+    {
+        // Get all existing IDs and find the highest number
+        $existingIds = Kategori::pluck('id_kategori')
+            ->filter(function($id) {
+                return preg_match('/^KT\d+$/', $id);
+            })
+            ->map(function($id) {
+                return intval(substr($id, 2));
+            })
+            ->sort()
+            ->values();
+
+        if ($existingIds->isEmpty()) {
+            return 'KT001';
+        }
+
+        $nextNumber = $existingIds->max() + 1;
+
+        // Format as KT + zero-padded number
+        return 'KT' . str_pad($nextNumber, 3, '0', STR_PAD_LEFT);
+    }
     public function index()
     {
         $kategoris = Kategori::all();
@@ -15,18 +37,28 @@ class JDController extends Controller
 
     public function create()
     {
-        return view('kategori.create');
+        $nextId = $this->generateNextId();
+        return view('kategori.create', compact('nextId'));
     }
 
     public function store(Request $request)
     {
-        $request->validate([
-            'id_kategori' => 'required|string|max:5|unique:kategori,id_kategori',
+        $rules = [
             'nama_kategori' => 'required',
             'deskripsi' => 'nullable',
-        ]);
+        ];
 
-        Kategori::create($request->all());
+
+        $validated = $request->validate($rules);
+
+
+         // Generate next document ID with retry logic for race conditions
+        do {
+            $validated['id_kategori'] = $this->generateNextId();
+            $exists = Kategori::where('id_kategori', $validated['id_kategori'])->exists();
+        } while ($exists);
+
+        Kategori::create($validated);
         return redirect()->route('jenisDokumen.index')->with('success', 'Kategori berhasil ditambahkan');
     }
 
@@ -52,6 +84,13 @@ class JDController extends Controller
     public function destroy($id_kategori)
     {
         $kategori = Kategori::findOrFail($id_kategori);
+
+        // Check if there are any documents associated with this category
+        if ($kategori->dokumen()->exists()) {
+            return redirect()->route('jenisDokumen.index')
+            ->with('error', 'Kategori tidak dapat dihapus karena masih memiliki dokumen terkait. Hapus semua dokumen terkait terlebih dahulu.');
+        }
+
         $kategori->delete();
         return redirect()->route('jenisDokumen.index')->with('success', 'Kategori berhasil dihapus');
     }
