@@ -42,14 +42,14 @@
                                     <td>
                                         <span class="badge badge-secondary p-2">{{ $user->id_user }}</span>
                                         @if($user->id_user == auth()->user()->id_user)
-                                            <span class="badge badge-info ml-1">
-                                                <i class="fas fa-user"></i> You
-                                            </span>
+                                        <span class="badge badge-info ml-1">
+                                            <i class="fas fa-user"></i> You
+                                        </span>
                                         @endif
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="font-weight-bold">Nama Lengkap</td>
+                                    <td class="font-weight-bold">Nama User</td>
                                     <td>:</td>
                                     <td><strong>{{ $user->nama_lengkap }}</strong></td>
                                 </tr>
@@ -73,23 +73,23 @@
                                     <td>:</td>
                                     <td>
                                         @if($user->role)
-                                            @if($user->id_role == 1)
-                                                <span class="badge badge-danger p-2">
-                                                    <i class="fas fa-crown"></i> {{ $user->role->nama_role }}
-                                                </span>
-                                            @elseif($user->id_role == 2)
-                                                <span class="badge badge-success p-2">
-                                                    <i class="fas fa-user"></i> {{ $user->role->nama_role }}
-                                                </span>
-                                            @else
-                                                <span class="badge badge-secondary p-2">
-                                                    <i class="fas fa-question"></i> {{ $user->role->nama_role }}
-                                                </span>
-                                            @endif
+                                        @if($user->id_role == 1)
+                                        <span class="badge badge-danger p-2">
+                                            <i class="fas fa-crown"></i> {{ $user->role->nama_role }}
+                                        </span>
+                                        @elseif($user->id_role == 2)
+                                        <span class="badge badge-success p-2">
+                                            <i class="fas fa-user"></i> {{ $user->role->nama_role }}
+                                        </span>
                                         @else
-                                            <span class="badge badge-warning p-2">
-                                                <i class="fas fa-exclamation"></i> No Role
-                                            </span>
+                                        <span class="badge badge-secondary p-2">
+                                            <i class="fas fa-question"></i> {{ $user->role->nama_role }}
+                                        </span>
+                                        @endif
+                                        @else
+                                        <span class="badge badge-warning p-2">
+                                            <i class="fas fa-exclamation"></i> No Role
+                                        </span>
                                         @endif
                                     </td>
                                 </tr>
@@ -98,15 +98,15 @@
                                     <td>:</td>
                                     <td>
                                         @if($user->email_verified_at)
-                                            <span class="badge badge-success p-2">
-                                                <i class="fas fa-check-circle"></i> Verified
-                                            </span>
-                                            <br>
-                                            <small class="text-muted">{{ $user->email_verified_at->format('d M Y H:i') }}</small>
+                                        <span class="badge badge-success p-2">
+                                            <i class="fas fa-check-circle"></i> Verified
+                                        </span>
+                                        <br>
+                                        <small class="text-muted">{{ $user->email_verified_at->format('d M Y H:i') }}</small>
                                         @else
-                                            <span class="badge badge-warning p-2">
-                                                <i class="fas fa-clock"></i> Unverified
-                                            </span>
+                                        <span class="badge badge-warning p-2">
+                                            <i class="fas fa-clock"></i> Unverified
+                                        </span>
                                         @endif
                                     </td>
                                 </tr>
@@ -138,14 +138,14 @@
                 </div>
                 <div class="card-body text-center">
                     @if($user->foto)
-                        <img src="{{ asset('storage/' . $user->foto) }}" alt="{{ $user->nama_lengkap }}"
-                             class="rounded-circle img-fluid mb-3"
-                             style="max-width: 200px; max-height: 200px; width: 200px; height: 200px; object-fit: cover;">
+                    <img src="{{ asset('storage/' . $user->foto) }}" alt="{{ $user->nama_lengkap }}"
+                        class="rounded-circle img-fluid mb-3"
+                        style="max-width: 200px; max-height: 200px; width: 200px; height: 200px; object-fit: cover;">
                     @else
-                        <div class="avatar avatar-xl bg-primary text-white rounded-circle d-flex align-items-center justify-content-center mb-3 mx-auto"
-                             style="width: 200px; height: 200px; font-size: 4rem;">
-                            {{ strtoupper(substr($user->nama_lengkap, 0, 2)) }}
-                        </div>
+                    <div class="avatar avatar-xl bg-primary text-white rounded-circle d-flex align-items-center justify-content-center mb-3 mx-auto"
+                        style="width: 200px; height: 200px; font-size: 4rem;">
+                        {{ strtoupper(substr($user->nama_lengkap, 0, 2)) }}
+                    </div>
                     @endif
                     <h5 class="mb-0">{{ $user->nama_lengkap }}</h5>
                     <p class="text-muted">{{ $user->role->nama_role ?? 'N/A' }}</p>
@@ -161,15 +161,15 @@
                 <div class="card-body">
                     <h6 class="font-weight-bold text-primary">{{ $user->role->nama_role }}</h6>
                     @if($user->role->deskripsi ?? null)
-                        <p class="text-muted small mb-0">{{ $user->role->deskripsi }}</p>
+                    <p class="text-muted small mb-0">{{ $user->role->deskripsi }}</p>
                     @else
-                        <p class="text-muted small mb-0">
-                            @if($user->id_role == 1)
-                                Administrator dengan akses penuh ke sistem
-                            @elseif($user->id_role == 2)
-                                User dengan akses terbatas
-                            @endif
-                        </p>
+                    <p class="text-muted small mb-0">
+                        @if($user->id_role == 1)
+                        Administrator dengan akses penuh ke sistem
+                        @elseif($user->id_role == 2)
+                        User dengan akses terbatas
+                        @endif
+                    </p>
                     @endif
                 </div>
             </div>
@@ -192,7 +192,7 @@
                     <hr>
                     <div class="text-center">
                         <button type="button" class="btn btn-danger btn-sm"
-                                onclick="confirmDelete('{{ $user->id_user }}', '{{ $user->nama_lengkap }}')">
+                            onclick="confirmDelete('{{ $user->id_user }}', '{{ $user->nama_lengkap }}')">
                             <i class="fas fa-trash"></i> Hapus User
                         </button>
                     </div>

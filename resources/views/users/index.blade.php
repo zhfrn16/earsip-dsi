@@ -53,7 +53,7 @@
                                 <tr>
                                     <th width="5%">No</th>
                                     <th>Foto</th>
-                                    <th>Nama Lengkap</th>
+                                    <th>Nama User</th>
                                     <th>Username</th>
                                     <th>Email</th>
                                     <th>Role</th>
@@ -69,20 +69,20 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td>
                                         @if($user->foto)
-                                            <img src="{{ asset('storage/' . $user->foto) }}" alt="{{ $user->nama_lengkap }}"
-                                                 class="rounded-circle" width="40" height="40">
+                                        <img src="{{ asset('storage/' . $user->foto) }}" alt="{{ $user->nama_lengkap }}"
+                                            class="rounded-circle" width="40" height="40">
                                         @else
-                                            <div class="avatar avatar-md bg-primary text-white rounded-circle d-flex align-items-center justify-content-center">
-                                                {{ strtoupper(substr($user->nama_lengkap, 0, 2)) }}
-                                            </div>
+                                        <div class="avatar avatar-md bg-primary text-white rounded-circle d-flex align-items-center justify-content-center">
+                                            {{ strtoupper(substr($user->nama_lengkap, 0, 2)) }}
+                                        </div>
                                         @endif
                                     </td>
                                     <td>
                                         <strong>{{ $user->nama_lengkap }}</strong>
                                         @if($user->id_user == auth()->user()->id_user)
-                                            <span class="badge badge-info">
-                                                <i class="fas fa-user"></i> You
-                                            </span>
+                                        <span class="badge badge-info">
+                                            <i class="fas fa-user"></i> You
+                                        </span>
                                         @endif
                                     </td>
                                     <td>
@@ -91,52 +91,52 @@
                                     <td>{{ $user->email }}</td>
                                     <td>
                                         @if($user->role)
-                                            @if($user->id_role == 1)
-                                                <span class="badge badge-danger">
-                                                    <i class="fas fa-crown"></i> {{ $user->role->nama_role }}
-                                                </span>
-                                            @elseif($user->id_role == 2)
-                                                <span class="badge badge-success">
-                                                    <i class="fas fa-user"></i> {{ $user->role->nama_role }}
-                                                </span>
-                                            @else
-                                                <span class="badge badge-secondary">
-                                                    <i class="fas fa-question"></i> {{ $user->role->nama_role }}
-                                                </span>
-                                            @endif
+                                        @if($user->id_role == 1)
+                                        <span class="badge badge-danger">
+                                            <i class="fas fa-crown"></i> {{ $user->role->nama_role }}
+                                        </span>
+                                        @elseif($user->id_role == 2)
+                                        <span class="badge badge-success">
+                                            <i class="fas fa-user"></i> {{ $user->role->nama_role }}
+                                        </span>
                                         @else
-                                            <span class="badge badge-warning">
-                                                <i class="fas fa-exclamation"></i> No Role
-                                            </span>
+                                        <span class="badge badge-secondary">
+                                            <i class="fas fa-question"></i> {{ $user->role->nama_role }}
+                                        </span>
+                                        @endif
+                                        @else
+                                        <span class="badge badge-warning">
+                                            <i class="fas fa-exclamation"></i> No Role
+                                        </span>
                                         @endif
                                     </td>
                                     <td>
                                         @if($user->email_verified_at)
-                                            <span class="badge badge-success">
-                                                <i class="fas fa-check-circle"></i> Verified
-                                            </span>
+                                        <span class="badge badge-success">
+                                            <i class="fas fa-check-circle"></i> Verified
+                                        </span>
                                         @else
-                                            <span class="badge badge-warning">
-                                                <i class="fas fa-clock"></i> Unverified
-                                            </span>
+                                        <span class="badge badge-warning">
+                                            <i class="fas fa-clock"></i> Unverified
+                                        </span>
                                         @endif
                                     </td>
                                     @if(auth()->user()->id_role == 1)
                                     <td>
                                         <div class="btn-group" role="group">
                                             <a href="{{ route('users.show', $user->id_user) }}"
-                                               class="btn btn-sm btn-info" title="Detail">
+                                                class="btn btn-sm btn-info" title="Detail">
                                                 <i class="fas fa-eye"></i>
                                             </a>
                                             @if($user->id_user != auth()->user()->id_user || auth()->user()->id_role == 1)
                                             <a href="{{ route('users.edit', $user->id_user) }}"
-                                               class="btn btn-sm btn-warning" title="Edit">
+                                                class="btn btn-sm btn-warning" title="Edit">
                                                 <i class="fas fa-edit"></i>
                                             </a>
                                             @endif
                                             @if($user->id_user != auth()->user()->id_user)
                                             <button type="button" class="btn btn-sm btn-danger" title="Hapus"
-                                                    onclick="confirmDelete('{{ $user->id_user }}', '{{ $user->nama_lengkap }}')">
+                                                onclick="confirmDelete('{{ $user->id_user }}', '{{ $user->nama_lengkap }}')">
                                                 <i class="fas fa-trash"></i>
                                             </button>
                                             @endif
@@ -192,7 +192,9 @@
                     "previous": "Sebelumnya"
                 }
             },
-            order: [[2, 'asc']]
+            order: [
+                [2, 'asc']
+            ]
         });
     });
 

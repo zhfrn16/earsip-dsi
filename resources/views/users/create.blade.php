@@ -19,38 +19,38 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="nama_lengkap">Nama Lengkap <span class="text-danger">*</span></label>
+                                    <label for="nama_lengkap">Nama User <span class="text-danger">*</span></label>
                                     <input type="text" class="form-control @error('nama_lengkap') is-invalid @enderror"
-                                           id="nama_lengkap" name="nama_lengkap" value="{{ old('nama_lengkap') }}" required>
+                                        id="nama_lengkap" name="nama_lengkap" value="{{ old('nama_lengkap') }}" required>
                                     @error('nama_lengkap')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
                                     @enderror
                                 </div>
 
                                 <div class="form-group">
                                     <label for="username">Username <span class="text-danger">*</span></label>
                                     <input type="text" class="form-control @error('username') is-invalid @enderror"
-                                           id="username" name="username" value="{{ old('username') }}" required>
+                                        id="username" name="username" value="{{ old('username') }}" required>
                                     <small class="form-text text-muted">
                                         Username akan digunakan untuk login (tanpa spasi, karakter khusus diperbolehkan: _, -, .)
                                     </small>
                                     @error('username')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
                                     @enderror
                                 </div>
 
                                 <div class="form-group">
                                     <label for="email">Email <span class="text-danger">*</span></label>
                                     <input type="email" class="form-control @error('email') is-invalid @enderror"
-                                           id="email" name="email" value="{{ old('email') }}" required>
+                                        id="email" name="email" value="{{ old('email') }}" required>
                                     @error('email')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
                                     @enderror
                                 </div>
 
@@ -59,20 +59,20 @@
                                     <select class="form-control @error('id_role') is-invalid @enderror" id="id_role" name="id_role" required>
                                         <option value="">-- Pilih Role --</option>
                                         @foreach($roles as $role)
-                                            <option value="{{ $role->id_role }}" {{ old('id_role') == $role->id_role ? 'selected' : '' }}>
-                                                {{ $role->nama_role }}
-                                                @if($role->id_role == 1)
-                                                    (Administrator)
-                                                @elseif($role->id_role == 2)
-                                                    (Staff)
-                                                @endif
-                                            </option>
+                                        <option value="{{ $role->id_role }}" {{ old('id_role') == $role->id_role ? 'selected' : '' }}>
+                                            {{ $role->nama_role }}
+                                            @if($role->id_role == 1)
+                                            (Administrator)
+                                            @elseif($role->id_role == 2)
+                                            (Staff)
+                                            @endif
+                                        </option>
                                         @endforeach
                                     </select>
                                     @error('id_role')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
                                     @enderror
                                 </div>
                             </div>
@@ -82,7 +82,7 @@
                                     <label for="password">Password <span class="text-danger">*</span></label>
                                     <div class="input-group">
                                         <input type="password" class="form-control @error('password') is-invalid @enderror"
-                                               id="password" name="password" required>
+                                            id="password" name="password" required>
                                         <div class="input-group-append">
                                             <button class="btn btn-outline-secondary" type="button" onclick="togglePassword('password')">
                                                 <i class="fas fa-eye" id="password-eye"></i>
@@ -93,9 +93,9 @@
                                         Password minimal 6 karakter
                                     </small>
                                     @error('password')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
                                     @enderror
                                 </div>
 
@@ -103,7 +103,7 @@
                                     <label for="password_confirmation">Konfirmasi Password <span class="text-danger">*</span></label>
                                     <div class="input-group">
                                         <input type="password" class="form-control @error('password_confirmation') is-invalid @enderror"
-                                               id="password_confirmation" name="password_confirmation" required>
+                                            id="password_confirmation" name="password_confirmation" required>
                                         <div class="input-group-append">
                                             <button class="btn btn-outline-secondary" type="button" onclick="togglePassword('password_confirmation')">
                                                 <i class="fas fa-eye" id="password_confirmation-eye"></i>
@@ -111,9 +111,9 @@
                                         </div>
                                     </div>
                                     @error('password_confirmation')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
                                     @enderror
                                 </div>
 
@@ -121,16 +121,16 @@
                                     <label for="foto">Foto Profile</label>
                                     <div class="custom-file">
                                         <input type="file" class="custom-file-input @error('foto') is-invalid @enderror"
-                                               id="foto" name="foto" accept="image/jpeg,image/png,image/jpg,image/gif">
+                                            id="foto" name="foto" accept="image/jpeg,image/png,image/jpg,image/gif">
                                         <label class="custom-file-label" for="foto">Pilih foto</label>
                                     </div>
                                     <small class="form-text text-muted">
                                         File yang diizinkan: JPG, JPEG, PNG, GIF. Maksimal 2MB.
                                     </small>
                                     @error('foto')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
                                     @enderror
                                 </div>
 
@@ -214,8 +214,8 @@
         $('#nama_lengkap').on('input', function() {
             let nama = $(this).val();
             let username = nama.toLowerCase()
-                              .replace(/\s+/g, '_')
-                              .replace(/[^a-z0-9_-]/g, '');
+                .replace(/\s+/g, '_')
+                .replace(/[^a-z0-9_-]/g, '');
             $('#username').val(username);
         });
     });
