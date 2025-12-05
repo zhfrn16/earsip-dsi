@@ -17,12 +17,13 @@
       @if (auth()->user()->id_role == 1 || auth()->user()->id_role == 2)
       <li class="menu-header">Arsip</li>
       <li class="nav-item dropdown">
-        <a href="#" class="nav-link has-dropdown"><i class="fas fa-file-alt"></i><span>Dokumen</span></a>
-        <ul class="dropdown-menu">
-          <li><a class="nav-link" href="{{ route('dokumen.index') }}">List Dokumen</a></li>
-          <li><a class="nav-link" href="{{ route('dokumen.create') }}">Tambah Dokumen</a></li>
-        </ul>
-      </li>
+          <a href="#" class="nav-link has-dropdown"><i class="fas fa-file-alt"></i><span>Dokumen</span></a>
+          <ul class="dropdown-menu">
+              <li><a class="nav-link" href="{{ route('dokumen.index') }}">List Dokumen</a></li>
+              <li><a class="nav-link" href="{{ route('dokumen.create') }}">Tambah Dokumen</a></li>
+            </ul>
+        </li>
+        <li><a class="nav-link" href="{{ route('laporan.surat.index') }}"><i class="fas fa-book"></i> <span>Laporan</span></a></li>
       @endif
 
       {{-- <li class="menu-header">Surat</li>

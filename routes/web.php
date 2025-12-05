@@ -59,6 +59,12 @@ Route::get('/surat-keluar/export-pdf', 'SuratKeluarController@exportPdf')->name(
 
 // Route Users (untuk user management)
 Route::resource('users', 'UserController');
+
+// Route Laporan Surat
+Route::get('/laporan/surat', 'LaporanSuratController@index')->name('laporan.surat.index');
+Route::get('/laporan/surat/export-excel', 'LaporanSuratController@exportExcel')->name('laporan.surat.export-excel');
+Route::get('/laporan/surat/export-pdf', 'LaporanSuratController@exportPdf')->name('laporan.surat.export-pdf');
+
 Route::post('/dataArsip/getDokumen', 'DataArsipController@getDataSerahTerima')->name('arsip');
 Route::post('/dataArsip/getArsip', 'DataArsipController@getDataArsip')->name('getArsip');
 Route::post('/arsip/export', 'DataArsipController@exportDataArsip');
