@@ -45,7 +45,7 @@
             <td>{{ $surat->created_at ? date('d/m/Y', strtotime($surat->created_at)) : '-' }}</td>
             <td>{{ $surat->no_dokumen }}</td>
             <td>{{ $surat->suratMasuk->pengirim_surat }}</td>
-            <td>{{ Str::limit($surat->deskripsi, 50) }}</td>
+            <td>{{ $surat->deskripsi }}</td>
             <td>{{ $surat->kategori->nama_kategori ?? '-' }}</td>
         </tr>
         @empty
@@ -81,7 +81,7 @@
             <td>{{ $surat->created_at ? date('d/m/Y', strtotime($surat->created_at)) : '-' }}</td>
             <td>{{ $surat->no_dokumen }}</td>
             <td>{{ $surat->suratKeluar->tujuan_surat }}</td>
-            <td>{{ Str::limit($surat->deskripsi, 50) }}</td>
+            <td>{{ $surat->deskripsi }}</td>
             <td>{{ $surat->kategori->nama_kategori ?? '-' }}</td>
         </tr>
         @empty
