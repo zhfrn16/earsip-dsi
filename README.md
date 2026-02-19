@@ -1,20 +1,21 @@
-# About SIArsip
+# About earsip
 
-SIArsip adalah sebuah aplikasi berbasis web yang dibuat menggunakan framework PHP yaitu Laravel, aplikasi ini dibangun dengan tujuan agar proses record data baru serta penempatan arsip dokumen jauh lebih mudah dan efesien.
+E-Arsip DSI adalah sebuah aplikasi berbasis web yang dibuat menggunakan framework PHP yaitu Laravel, aplikasi ini dibangun dengan tujuan agar proses record data baru serta penempatan arsip dokumen jauh lebih mudah dan efesien pada departemen sistem informasi universitas andalas.
 
 Berikut fitur-fitur yang tersedia :
 
+-   Dashboard.
 -   Form dinamis.
 -   Filter data.
--   Import Excel to Web.
 -   Export to Excel.
--   Auth with Jetstream Team.
--   Using autocomplete.
+-   Export to pdf.
+-   Archive recap.
+-   Manage multi user.
 -   and many more.
 
 ## Requirements
 
--   PHP >= 7
+-   PHP >= 8
 -   Bootstrap 4.5
 -   JQuery 3.5.1
 -   Popper.js 1.14.7
@@ -23,10 +24,10 @@ Berikut fitur-fitur yang tersedia :
 ## Installation
 
 Clone
-[program](https://github.com/EinzFiore/siArsip.git) untuk clone
+[program](https://github.com/zhfrn16/earsip-dsi.git) untuk clone
 
 ```bash
-git clone https://github.com/EinzFiore/siArsip.git your_project
+git clone https://github.com/EinzFiore/siArsip.git your_project](https://github.com/zhfrn16/earsip-dsi.git
 go to directory folder your_project
 move your_project to C:\xampp\htdocs
 
